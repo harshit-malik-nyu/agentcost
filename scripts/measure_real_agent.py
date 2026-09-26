@@ -109,6 +109,8 @@ def run(model_name: str, limit_contracts: int, budget_s: float,
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
+    print(f"budget {budget_s:.0f}s for up to {limit_contracts} contracts",
+          flush=True)
     for doc in docs[:limit_contracts]:
         if time.time() - started > budget_s:
             truncated = True
@@ -118,7 +120,12 @@ def run(model_name: str, limit_contracts: int, budget_s: float,
 
         for para in doc["paragraphs"]:
             context = para["context"]
+            print(f"  contract {contracts_done + 1}: {len(context):,} chars, "
+                  f"{len(para['qas'])} questions", flush=True)
             for qa_item in para["qas"]:
+                if time.time() - started > budget_s:
+                    truncated = True
+                    break
                 clause = qa_item["id"].split("__")[-1]
                 gold = [a["text"] for a in qa_item.get("answers", [])]
                 try:

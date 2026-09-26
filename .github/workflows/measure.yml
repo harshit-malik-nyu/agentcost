@@ -12,7 +12,7 @@ concurrency:
 jobs:
   measure:
     runs-on: ubuntu-latest
-    timeout-minutes: 55
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -27,6 +27,7 @@ jobs:
           key: cuad-model-v1
 
       - name: Install
+        timeout-minutes: 15
         run: |
           pip install --quiet torch --index-url https://download.pytorch.org/whl/cpu
           pip install --quiet transformers
@@ -34,8 +35,13 @@ jobs:
 
       - name: Measure
         run: |
+          # Scope set by measured throughput, not optimism. A 6,400-token
+          # contract at stride 128 is ~25 windows per question and 41 questions
+          # per contract, so roughly a thousand CPU forward passes each. The
+          # first attempt asked for 30 contracts and died at the timeout having
+          # committed nothing.
           python scripts/measure_real_agent.py \
-            --contracts 30 --budget 2100 2>&1 | tee evidence/measure-run.txt
+            --contracts 8 --budget 1500 2>&1 | tee evidence/measure-run.txt
 
       - name: Job summary
         if: always()
