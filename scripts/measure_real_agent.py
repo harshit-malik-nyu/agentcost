@@ -137,7 +137,28 @@ class Extractor:
         self.model.eval()
 
     def __call__(self, question: str, context: str, max_len: int = 384,
-                 max_answer_tokens: int = 60) -> tuple[str, float]:
+                 max_answer_tokens: int = 60) -> tuple[str, dict[str, float]]:
+        """
+        Returns the predicted span and THREE confidence estimates.
+
+        Reporting one number would conflate two questions: whether the model
+        is uncalibrated, and whether the estimator is. The first measurement
+        used only the null margin, which saturates by construction on a model
+        trained with a null class — so "this model has no usable confidence"
+        was partly a claim about the estimator.
+
+            null_margin   softmax between the best span and the null span.
+                          The practitioner default for this architecture.
+            span_prob     softmax over all admissible spans, probability mass
+                          on the chosen one. Measures how peaked the span
+                          distribution is, independent of the null class.
+            start_end     geometric mean of the independent start and end
+                          token probabilities. A cruder signal that does not
+                          depend on span enumeration at all.
+
+        If ranking is absent under all three, the finding is about the model.
+        If one of them ranks errors, the finding was about the estimator.
+        """
         torch = self.torch
         enc = self.tok(question, context, truncation="only_second",
                        max_length=max_len, return_tensors="pt",
@@ -157,27 +178,45 @@ class Extractor:
 
         null = (start[0] + end[0]).item()
 
+        valid_t = torch.tensor(valid)
         best, best_span = float("-inf"), None
+        span_scores: list[float] = []
         for i in valid:
             for j in valid:
                 if j < i or j - i + 1 > max_answer_tokens:
                     continue
                 score = (start[i] + end[j]).item()
+                span_scores.append(score)
                 if score > best:
                     best, best_span = score, (i, j)
 
         if best_span is None:
-            return "", 0.0
+            return "", {"null_margin": 0.0, "span_prob": 0.0, "start_end": 0.0}
 
-        # Two-way softmax between answering and declining.
+        import math
+
+        # 1. Two-way softmax between answering and declining.
         m = max(best, null)
-        p_answer = pow(2.718281828, best - m)
-        p_null = pow(2.718281828, null - m)
-        conf = p_answer / (p_answer + p_null)
+        p_answer = math.exp(best - m)
+        p_null = math.exp(null - m)
+        null_margin = p_answer / (p_answer + p_null)
 
+        # 2. Softmax over all admissible spans: how peaked is the choice?
+        mx = max(span_scores)
+        denom = sum(math.exp(sc - mx) for sc in span_scores)
+        span_prob = math.exp(best - mx) / denom if denom else 0.0
+
+        # 3. Independent start and end token probabilities, geometric mean.
         i, j = best_span
+        s_probs = torch.softmax(start[valid_t], dim=0)
+        e_probs = torch.softmax(end[valid_t], dim=0)
+        pos = {v: k for k, v in enumerate(valid)}
+        start_end = float((s_probs[pos[i]] * e_probs[pos[j]]) ** 0.5)
+
         text = context[int(offsets[i][0]):int(offsets[j][1])]
-        return text, float(conf)
+        return text, {"null_margin": float(null_margin),
+                      "span_prob": float(span_prob),
+                      "start_end": start_end}
 
 
 def run(model_name: str, limit_contracts: int, budget_s: float,
@@ -221,15 +260,20 @@ def run(model_name: str, limit_contracts: int, budget_s: float,
                 gold = [a["text"] for a in qa_item.get("answers", [])
                         if a["text"] in context]
                 try:
-                    text, conf = qa(qa_item["question"], context)
+                    text, confs = qa(qa_item["question"], context)
                 except Exception as exc:          # noqa: BLE001
                     print(f"  skipped {clause}: {type(exc).__name__}: {exc}",
                           flush=True)
                     continue
+                conf = confs["null_margin"]
                 records.append({
+                    "model": model_name,
                     "contract": doc.get("title", f"doc-{contracts_done}"),
                     "clause": clause,
                     "confidence": conf,
+                    "conf_null_margin": confs["null_margin"],
+                    "conf_span_prob": confs["span_prob"],
+                    "conf_start_end": confs["start_end"],
                     "predicted": text[:300],
                     "gold_present": bool(gold),
                     "correct": score_prediction(text, conf, gold, min_conf),
@@ -249,6 +293,42 @@ def run(model_name: str, limit_contracts: int, budget_s: float,
         "truncated": truncated,
         "seconds": time.time() - started,
         "min_confidence_to_answer": min_conf,
+    }
+
+
+ESTIMATORS = ("conf_null_margin", "conf_span_prob", "conf_start_end")
+
+
+def analyse_estimator(records: list[dict], field: str) -> dict:
+    """Capture behaviour under one confidence estimator."""
+    sys.path.insert(0, str(ROOT / "src"))
+    from agentcost.calibration import Answer, capture_curve
+
+    answers = [Answer(item_id=r["contract"], clause_type=r["clause"],
+                      confidence=r.get(field, r["confidence"]),
+                      correct=r["correct"])
+               for r in records]
+    curve = capture_curve(answers)
+
+    ordered = sorted(answers, key=lambda a: a.confidence)
+    n_err = sum(1 for a in ordered if not a.correct)
+    caught = {}
+    for frac in (0.05, 0.10, 0.25, 0.50):
+        k = int(len(ordered) * frac)
+        caught[f"caught_at_{int(frac*100)}pct"] = (
+            sum(1 for a in ordered[:k] if not a.correct) / n_err
+            if n_err else 1.0)
+
+    distinct = len({round(a.confidence, 3) for a in answers})
+    return {
+        "estimator": field,
+        "lift": curve.lift,
+        "accuracy": curve.accuracy,
+        "errors": n_err,
+        "distinct_values": distinct,
+        "saturation": 1 - distinct / max(1, len(answers)),
+        **caught,
+        "review_for_95pct_capture": curve.review_rate_for(0.05),
     }
 
 
@@ -279,7 +359,10 @@ def analyse(records: list[dict]) -> dict:
         }
 
     majority = sum(1 for r in records if not r["gold_present"]) / max(1, len(records))
+    by_estimator = [analyse_estimator(records, f) for f in ESTIMATORS
+                    if any(f in r for r in records)]
     return {
+        "by_estimator": by_estimator,
         "accuracy": curve.accuracy,
         "majority_class_baseline": majority,
         "lift_at_error_rate": curve.lift,
@@ -290,9 +373,19 @@ def analyse(records: list[dict]) -> dict:
     }
 
 
+MODELS = [
+    "akdeniz27/roberta-base-cuad",
+    "Rakib/roberta-base-on-cuad",
+    "marshmellow77/roberta-base-cuad",
+]
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default=DEFAULT_MODEL)
+    ap.add_argument("--all-models", action="store_true",
+                    help="run every known CUAD checkpoint, so the finding is "
+                         "about the method rather than one snapshot")
     ap.add_argument("--contracts", type=int, default=25)
     ap.add_argument("--budget", type=float, default=2400,
                     help="seconds before checkpointing and stopping")
@@ -304,18 +397,48 @@ def main() -> int:
     ap.add_argument("--cache", default=str(ROOT / ".cache"))
     args = ap.parse_args()
 
-    raw = Path(args.out).with_suffix(".records.json")
-    meta = run(args.model, args.contracts, args.budget, raw,
-               Path(args.cache), args.min_conf, args.max_chars)
+    models = MODELS if args.all_models else [args.model]
+    per_model, all_records = [], []
 
-    records = json.loads(raw.read_text()) if raw.exists() else []
-    if not records:
-        print("no records produced; refusing to write an empty result",
+    for name in models:
+        raw = Path(args.out).with_suffix(f".{name.split('/')[-1]}.json")
+        try:
+            meta = run(name, args.contracts, args.budget / len(models), raw,
+                       Path(args.cache), args.min_conf, args.max_chars)
+        except Exception as exc:          # noqa: BLE001
+            print(f"!! {name} unavailable: {type(exc).__name__}: {exc}",
+                  file=sys.stderr, flush=True)
+            continue
+        recs = json.loads(raw.read_text()) if raw.exists() else []
+        if not recs:
+            continue
+        all_records.extend(recs)
+        per_model.append({"method": meta, **analyse(recs)})
+
+    if not per_model:
+        print("no model produced records; refusing to write an empty result",
               file=sys.stderr)
         return 1
 
-    result = {"method": meta, **analyse(records)}
+    result = {"models": per_model,
+              "pooled": analyse(all_records) if len(per_model) > 1 else None}
     Path(args.out).write_text(json.dumps(result, indent=2))
+
+    print()
+    print("=" * 74)
+    print("  CONFIDENCE ESTIMATOR COMPARISON  (lift > 1 means errors rank low)")
+    print("=" * 74)
+    print(f"  {'model':26s} {'estimator':18s} {'lift':>6s} {'sat':>6s} "
+          f"{'err@25%':>8s}")
+    for m in per_model:
+        short = m["method"]["model"].split("/")[-1][:24]
+        for e in m["by_estimator"]:
+            print(f"  {short:26s} {e['estimator'][5:]:18s} {e['lift']:>6.2f} "
+                  f"{e['saturation']:>6.1%} {e['caught_at_25pct']:>7.0%}")
+    print("=" * 74)
+
+    meta = per_model[0]["method"]
+    result_first = per_model[0]
 
     print()
     print("=" * 66)
@@ -325,12 +448,13 @@ def main() -> int:
           f"{' (truncated)' if meta['truncated'] else ''}")
     print(f"  context per doc    : {meta['context_chars_used']:,} chars "
           f"(truncated)")
-    print(f"  accuracy           : {result['accuracy']:.1%}")
-    print(f"  majority baseline  : {result['majority_class_baseline']:.1%}")
-    print(f"  lift over random   : {result['lift_at_error_rate']:.2f}x")
-    print(f"  review for 95% capture: {result['review_for_95pct_capture']:.1%}")
+    print(f"  accuracy           : {result_first['accuracy']:.1%}")
+    print(f"  majority baseline  : {result_first['majority_class_baseline']:.1%}")
+    print(f"  lift over random   : {result_first['lift_at_error_rate']:.2f}x")
+    print(f"  review for 95% capture: "
+          f"{result_first['review_for_95pct_capture']:.1%}")
     print()
-    for name, pol in result["risk_controlled"].items():
+    for name, pol in result_first["risk_controlled"].items():
         print(f"  {name}: review {pol['review_rate']:.1%}, "
               f"held-out risk {pol['realised_risk_on_heldout']:.3f}, "
               f"target respected: {pol['respected_target']}")
