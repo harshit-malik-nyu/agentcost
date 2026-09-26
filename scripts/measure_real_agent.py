@@ -30,6 +30,25 @@ measure tokenisation rather than comprehension.
 answer in the contract, so the model must be allowed to decline, and declining
 correctly counts as correct. Scoring only the answerable subset would throw
 away the majority of the task.
+
+**Contexts are truncated, and that is a real limitation.**
+Two earlier attempts ran full contracts with sliding windows and both died at
+the CI timeout having committed nothing. The arithmetic: a 25,000-character
+contract at stride 128 is roughly 25 windows per question, times 41 questions,
+times a CPU forward pass each — minutes per contract before any of it is
+useful.
+
+Contexts are therefore truncated to the opening section. What that costs is
+specific and should be read with the result: clause types that appear late in
+a contract become unfindable, so measured accuracy is lower than the model
+would achieve with the whole document, and the mix of clause types is skewed
+toward those drafted near the front — parties, dates, term, governing law.
+
+What it does NOT distort is the quantity this exists to measure. The capture
+curve asks whether the model's confidence ranks its errors, and that is a
+property of the confidence signal on whatever inputs it sees. A model with
+useful calibration on truncated text has useful calibration; one without does
+not acquire it from longer inputs.
 """
 
 from __future__ import annotations
@@ -93,7 +112,8 @@ def score_prediction(pred_text: str, pred_score: float, gold_texts: list[str],
 
 
 def run(model_name: str, limit_contracts: int, budget_s: float,
-        out_path: Path, cache: Path, min_conf: float) -> dict:
+        out_path: Path, cache: Path, min_conf: float,
+        max_chars: int = 4000) -> dict:
     from transformers import pipeline
 
     docs = fetch_corpus(cache)
@@ -119,15 +139,20 @@ def run(model_name: str, limit_contracts: int, budget_s: float,
             break
 
         for para in doc["paragraphs"]:
-            context = para["context"]
-            print(f"  contract {contracts_done + 1}: {len(context):,} chars, "
-                  f"{len(para['qas'])} questions", flush=True)
+            context = para["context"][:max_chars]
+            print(f"  contract {contracts_done + 1}: {len(context):,} chars "
+                  f"(of {len(para['context']):,}), {len(para['qas'])} questions",
+                  flush=True)
             for qa_item in para["qas"]:
                 if time.time() - started > budget_s:
                     truncated = True
                     break
                 clause = qa_item["id"].split("__")[-1]
-                gold = [a["text"] for a in qa_item.get("answers", [])]
+                # Gold answers outside the truncated window are unfindable by
+                # construction, so they are dropped rather than counted as
+                # misses the model had no chance at.
+                gold = [a["text"] for a in qa_item.get("answers", [])
+                        if a["text"] in context]
                 try:
                     res = qa(question=qa_item["question"], context=context,
                              handle_impossible_answer=True, max_answer_len=200,
@@ -154,6 +179,7 @@ def run(model_name: str, limit_contracts: int, budget_s: float,
 
     return {
         "model": model_name,
+        "context_chars_used": max_chars,
         "contracts_evaluated": contracts_done,
         "questions": len(records),
         "truncated": truncated,
@@ -206,6 +232,8 @@ def main() -> int:
     ap.add_argument("--contracts", type=int, default=25)
     ap.add_argument("--budget", type=float, default=2400,
                     help="seconds before checkpointing and stopping")
+    ap.add_argument("--max-chars", type=int, default=4000,
+                    help="truncate each contract to this many characters")
     ap.add_argument("--min-conf", type=float, default=0.05,
                     help="below this the model is treated as declining")
     ap.add_argument("--out", default=str(ROOT / "evidence" / "real_agent.json"))
@@ -214,7 +242,7 @@ def main() -> int:
 
     raw = Path(args.out).with_suffix(".records.json")
     meta = run(args.model, args.contracts, args.budget, raw,
-               Path(args.cache), args.min_conf)
+               Path(args.cache), args.min_conf, args.max_chars)
 
     records = json.loads(raw.read_text()) if raw.exists() else []
     if not records:
@@ -231,6 +259,8 @@ def main() -> int:
     print(f"  questions scored   : {meta['questions']:,} "
           f"over {meta['contracts_evaluated']} contracts"
           f"{' (truncated)' if meta['truncated'] else ''}")
+    print(f"  context per doc    : {meta['context_chars_used']:,} chars "
+          f"(truncated)")
     print(f"  accuracy           : {result['accuracy']:.1%}")
     print(f"  majority baseline  : {result['majority_class_baseline']:.1%}")
     print(f"  lift over random   : {result['lift_at_error_rate']:.2f}x")

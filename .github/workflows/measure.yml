@@ -12,7 +12,7 @@ concurrency:
 jobs:
   measure:
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -41,7 +41,8 @@ jobs:
           # first attempt asked for 30 contracts and died at the timeout having
           # committed nothing.
           python scripts/measure_real_agent.py \
-            --contracts 8 --budget 1500 2>&1 | tee evidence/measure-run.txt
+            --contracts 12 --max-chars 4000 --budget 1200 \
+            2>&1 | tee evidence/measure-run.txt
 
       - name: Job summary
         if: always()
