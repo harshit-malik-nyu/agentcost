@@ -230,7 +230,14 @@ def try_to_fix(records: list[dict], seed: int = 0, folds: int = 5) -> dict:
 
 
 def main() -> int:
-    paths = sorted((ROOT / "evidence").glob("real_agent.*.json"))
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--glob", default="real_agent.*.json",
+                    help="which measurement files to analyse")
+    ap.add_argument("--out", default=str(ROOT / "evidence" / "mechanism.json"))
+    args = ap.parse_args()
+
+    paths = sorted((ROOT / "evidence").glob(args.glob))
     records: list[dict] = []
     for p in paths:
         if p.name.endswith("records.json"):
@@ -247,12 +254,23 @@ def main() -> int:
               file=sys.stderr)
         return 1
 
+    by_model = {}
+    for r in records:
+        by_model.setdefault(r.get("model", "unknown"), []).append(r)
+
     result = {"n_records": len(records),
               "n_errors": sum(1 for r in records if not r["correct"]),
               "mechanism": mechanism(records),
-              "fix_attempt": try_to_fix(records)}
+              "fix_attempt": try_to_fix(records),
+              "per_model": {
+                  m: {"n": len(rs),
+                      "errors": sum(1 for r in rs if not r["correct"]),
+                      "mechanism": mechanism(rs),
+                      "fix_attempt": try_to_fix(rs)}
+                  for m, rs in by_model.items() if len(rs) > 60}}
 
-    out = ROOT / "evidence" / "mechanism.json"
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(result, indent=2))
 
     m, f = result["mechanism"], result["fix_attempt"]
@@ -275,6 +293,15 @@ def main() -> int:
     print(f"    raw confidence lift : {f['raw_confidence_lift']:.2f}")
     print(f"    trained lift        : {f['trained_lift']:.2f}")
     print(f"    {f['verdict']}")
+    if result.get("per_model") and len(result["per_model"]) > 1:
+        print()
+        print("  PER ARCHITECTURE")
+        print(f"    {'model':34s} {'raw':>6s} {'trained':>8s} {'present%':>9s}")
+        for name, d in result["per_model"].items():
+            print(f"    {name.split('/')[-1][:32]:34s} "
+                  f"{d['fix_attempt']['raw_confidence_lift']:>6.2f} "
+                  f"{d['fix_attempt']['trained_lift']:>8.2f} "
+                  f"{d['mechanism']['error_rate_when_clause_present']:>8.1%}")
     print("=" * 72)
     return 0
 

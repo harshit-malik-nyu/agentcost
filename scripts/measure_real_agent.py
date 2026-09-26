@@ -63,7 +63,52 @@ from urllib.request import urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_URL = "https://raw.githubusercontent.com/The-Atticus-Project/cuad/main/data.zip"
+SQUAD_URL = ("https://raw.githubusercontent.com/rajpurkar/SQuAD-explorer/"
+             "master/dataset/dev-v2.0.json")
 DEFAULT_MODEL = "akdeniz27/roberta-base-cuad"
+
+# A second task, for the generalisation test.
+#
+# CUAD is 90% unanswerable; SQuAD v2 is 50%. The mechanism proposed in
+# analyse_mechanism.py — that confidence encodes PRESENCE rather than
+# correctness, and pooled ranking collapses because presence dominates — makes
+# a falsifiable prediction about that difference: pooled lift should be
+# materially higher on the balanced task. If it is still zero there, the
+# explanation is wrong.
+#
+# SQuAD v2 also runs in a fraction of the time (712-character contexts against
+# 25,000), which is what makes testing several architectures affordable.
+SQUAD_MODELS = [
+    "deepset/roberta-base-squad2",        # same architecture, different task
+    "deepset/bert-base-cased-squad2",     # different architecture
+    "deepset/electra-base-squad2",        # different pre-training objective
+]
+
+
+def fetch_squad(cache: Path, limit_paragraphs: int = 400) -> list:
+    """
+    SQuAD v2 dev set, reshaped into the same structure as CUAD.
+
+    Both are SQuAD-format already, so the harness needs no special casing —
+    which is the point: the same measurement code runs on both tasks, so a
+    difference in result is a difference in the data rather than in the
+    instrument.
+    """
+    cache.mkdir(parents=True, exist_ok=True)
+    f = cache / "squad_dev_v2.json"
+    if not f.exists():
+        print(f"fetching {SQUAD_URL} ...", flush=True)
+        f.write_bytes(urlopen(SQUAD_URL, timeout=300).read())
+
+    raw = json.loads(f.read_text())
+    docs = []
+    for article in raw["data"]:
+        for para in article["paragraphs"]:
+            docs.append({"title": article.get("title", "squad"),
+                         "paragraphs": [para]})
+            if len(docs) >= limit_paragraphs:
+                return docs
+    return docs
 
 
 def fetch_corpus(cache: Path) -> list:
@@ -221,9 +266,10 @@ class Extractor:
 
 def run(model_name: str, limit_contracts: int, budget_s: float,
         out_path: Path, cache: Path, min_conf: float,
-        max_chars: int = 4000) -> dict:
-    docs = fetch_corpus(cache)
-    print(f"corpus: {len(docs)} contracts", flush=True)
+        max_chars: int = 4000, task: str = "cuad") -> dict:
+    docs = (fetch_squad(cache, limit_paragraphs=limit_contracts)
+            if task == "squad" else fetch_corpus(cache))
+    print(f"corpus [{task}]: {len(docs)} documents", flush=True)
 
     print(f"loading {model_name} (CPU) ...", flush=True)
     qa = Extractor(model_name)
@@ -267,6 +313,7 @@ def run(model_name: str, limit_contracts: int, budget_s: float,
                     continue
                 conf = confs["null_margin"]
                 records.append({
+                    "task": task,
                     "model": model_name,
                     "contract": doc.get("title", f"doc-{contracts_done}"),
                     "clause": clause,
@@ -286,6 +333,7 @@ def run(model_name: str, limit_contracts: int, budget_s: float,
               f"{time.time() - started:.0f}s", flush=True)
 
     return {
+        "task": task,
         "model": model_name,
         "context_chars_used": max_chars,
         "contracts_evaluated": contracts_done,
@@ -383,6 +431,7 @@ MODELS = [
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default=DEFAULT_MODEL)
+    ap.add_argument("--task", default="cuad", choices=["cuad", "squad"])
     ap.add_argument("--all-models", action="store_true",
                     help="run every known CUAD checkpoint, so the finding is "
                          "about the method rather than one snapshot")
@@ -397,14 +446,19 @@ def main() -> int:
     ap.add_argument("--cache", default=str(ROOT / ".cache"))
     args = ap.parse_args()
 
-    models = MODELS if args.all_models else [args.model]
+    if args.all_models:
+        models = SQUAD_MODELS if args.task == "squad" else MODELS
+    else:
+        models = [args.model]
     per_model, all_records = [], []
 
     for name in models:
-        raw = Path(args.out).with_suffix(f".{name.split('/')[-1]}.json")
+        raw = Path(args.out).with_suffix(
+            f".{args.task}.{name.split('/')[-1]}.json")
         try:
             meta = run(name, args.contracts, args.budget / len(models), raw,
-                       Path(args.cache), args.min_conf, args.max_chars)
+                       Path(args.cache), args.min_conf, args.max_chars,
+                       task=args.task)
         except Exception as exc:          # noqa: BLE001
             print(f"!! {name} unavailable: {type(exc).__name__}: {exc}",
                   file=sys.stderr, flush=True)
