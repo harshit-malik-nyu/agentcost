@@ -1,0 +1,727 @@
+{
+ "source": "CUAD v1 test split, The Atticus Project",
+ "url": "https://github.com/The-Atticus-Project/cuad",
+ "licence": "CC BY 4.0",
+ "note": "Expert annotations by practising lawyers, 41 clause types per contract. Only summary statistics are vendored; the full 40MB archive is fetched by the study script.",
+ "contracts": 102,
+ "questions_per_contract": 41,
+ "documents": [
+  {
+   "chars": 11475,
+   "questions": 41,
+   "clauses_present": 6
+  },
+  {
+   "chars": 15176,
+   "questions": 41,
+   "clauses_present": 10
+  },
+  {
+   "chars": 175580,
+   "questions": 41,
+   "clauses_present": 25
+  },
+  {
+   "chars": 145168,
+   "questions": 41,
+   "clauses_present": 24
+  },
+  {
+   "chars": 4871,
+   "questions": 41,
+   "clauses_present": 5
+  },
+  {
+   "chars": 30968,
+   "questions": 41,
+   "clauses_present": 11
+  },
+  {
+   "chars": 17917,
+   "questions": 41,
+   "clauses_present": 13
+  },
+  {
+   "chars": 25288,
+   "questions": 41,
+   "clauses_present": 15
+  },
+  {
+   "chars": 11770,
+   "questions": 41,
+   "clauses_present": 8
+  },
+  {
+   "chars": 27741,
+   "questions": 41,
+   "clauses_present": 6
+  },
+  {
+   "chars": 40442,
+   "questions": 41,
+   "clauses_present": 10
+  },
+  {
+   "chars": 3456,
+   "questions": 41,
+   "clauses_present": 5
+  },
+  {
+   "chars": 26753,
+   "questions": 41,
+   "clauses_present": 13
+  },
+  {
+   "chars": 19257,
+   "questions": 41,
+   "clauses_present": 12
+  },
+  {
+   "chars": 45846,
+   "questions": 41,
+   "clauses_present": 12
+  },
+  {
+   "chars": 49518,
+   "questions": 41,
+   "clauses_present": 18
+  },
+  {
+   "chars": 18069,
+   "questions": 41,
+   "clauses_present": 13
+  },
+  {
+   "chars": 27721,
+   "questions": 41,
+   "clauses_present": 15
+  },
+  {
+   "chars": 249551,
+   "questions": 41,
+   "clauses_present": 25
+  },
+  {
+   "chars": 1707,
+   "questions": 41,
+   "clauses_present": 4
+  },
+  {
+   "chars": 70444,
+   "questions": 41,
+   "clauses_present": 18
+  },
+  {
+   "chars": 229670,
+   "questions": 41,
+   "clauses_present": 13
+  },
+  {
+   "chars": 3493,
+   "questions": 41,
+   "clauses_present": 4
+  },
+  {
+   "chars": 13506,
+   "questions": 41,
+   "clauses_present": 7
+  },
+  {
+   "chars": 122688,
+   "questions": 41,
+   "clauses_present": 23
+  },
+  {
+   "chars": 39727,
+   "questions": 41,
+   "clauses_present": 17
+  },
+  {
+   "chars": 52252,
+   "questions": 41,
+   "clauses_present": 11
+  },
+  {
+   "chars": 16402,
+   "questions": 41,
+   "clauses_present": 7
+  },
+  {
+   "chars": 73685,
+   "questions": 41,
+   "clauses_present": 18
+  },
+  {
+   "chars": 8321,
+   "questions": 41,
+   "clauses_present": 10
+  },
+  {
+   "chars": 112447,
+   "questions": 41,
+   "clauses_present": 17
+  },
+  {
+   "chars": 75632,
+   "questions": 41,
+   "clauses_present": 15
+  },
+  {
+   "chars": 22259,
+   "questions": 41,
+   "clauses_present": 7
+  },
+  {
+   "chars": 17710,
+   "questions": 41,
+   "clauses_present": 6
+  },
+  {
+   "chars": 645,
+   "questions": 41,
+   "clauses_present": 3
+  },
+  {
+   "chars": 5030,
+   "questions": 41,
+   "clauses_present": 5
+  },
+  {
+   "chars": 20693,
+   "questions": 41,
+   "clauses_present": 19
+  },
+  {
+   "chars": 25060,
+   "questions": 41,
+   "clauses_present": 13
+  },
+  {
+   "chars": 5879,
+   "questions": 41,
+   "clauses_present": 3
+  },
+  {
+   "chars": 29629,
+   "questions": 41,
+   "clauses_present": 15
+  },
+  {
+   "chars": 73698,
+   "questions": 41,
+   "clauses_present": 13
+  },
+  {
+   "chars": 22700,
+   "questions": 41,
+   "clauses_present": 10
+  },
+  {
+   "chars": 55075,
+   "questions": 41,
+   "clauses_present": 16
+  },
+  {
+   "chars": 62272,
+   "questions": 41,
+   "clauses_present": 8
+  },
+  {
+   "chars": 16901,
+   "questions": 41,
+   "clauses_present": 9
+  },
+  {
+   "chars": 121559,
+   "questions": 41,
+   "clauses_present": 10
+  },
+  {
+   "chars": 144443,
+   "questions": 41,
+   "clauses_present": 23
+  },
+  {
+   "chars": 20008,
+   "questions": 41,
+   "clauses_present": 9
+  },
+  {
+   "chars": 14384,
+   "questions": 41,
+   "clauses_present": 6
+  },
+  {
+   "chars": 12624,
+   "questions": 41,
+   "clauses_present": 11
+  },
+  {
+   "chars": 29208,
+   "questions": 41,
+   "clauses_present": 16
+  },
+  {
+   "chars": 32371,
+   "questions": 41,
+   "clauses_present": 18
+  },
+  {
+   "chars": 14149,
+   "questions": 41,
+   "clauses_present": 5
+  },
+  {
+   "chars": 3314,
+   "questions": 41,
+   "clauses_present": 3
+  },
+  {
+   "chars": 11539,
+   "questions": 41,
+   "clauses_present": 11
+  },
+  {
+   "chars": 3892,
+   "questions": 41,
+   "clauses_present": 3
+  },
+  {
+   "chars": 102071,
+   "questions": 41,
+   "clauses_present": 11
+  },
+  {
+   "chars": 92875,
+   "questions": 41,
+   "clauses_present": 23
+  },
+  {
+   "chars": 40590,
+   "questions": 41,
+   "clauses_present": 16
+  },
+  {
+   "chars": 17786,
+   "questions": 41,
+   "clauses_present": 11
+  },
+  {
+   "chars": 2811,
+   "questions": 41,
+   "clauses_present": 3
+  },
+  {
+   "chars": 144235,
+   "questions": 41,
+   "clauses_present": 28
+  },
+  {
+   "chars": 29253,
+   "questions": 41,
+   "clauses_present": 15
+  },
+  {
+   "chars": 2106,
+   "questions": 41,
+   "clauses_present": 6
+  },
+  {
+   "chars": 28463,
+   "questions": 41,
+   "clauses_present": 15
+  },
+  {
+   "chars": 37337,
+   "questions": 41,
+   "clauses_present": 14
+  },
+  {
+   "chars": 87795,
+   "questions": 41,
+   "clauses_present": 23
+  },
+  {
+   "chars": 16792,
+   "questions": 41,
+   "clauses_present": 12
+  },
+  {
+   "chars": 27899,
+   "questions": 41,
+   "clauses_present": 16
+  },
+  {
+   "chars": 30102,
+   "questions": 41,
+   "clauses_present": 15
+  },
+  {
+   "chars": 82898,
+   "questions": 41,
+   "clauses_present": 12
+  },
+  {
+   "chars": 22730,
+   "questions": 41,
+   "clauses_present": 14
+  },
+  {
+   "chars": 24223,
+   "questions": 41,
+   "clauses_present": 16
+  },
+  {
+   "chars": 100746,
+   "questions": 41,
+   "clauses_present": 13
+  },
+  {
+   "chars": 3595,
+   "questions": 41,
+   "clauses_present": 3
+  },
+  {
+   "chars": 66442,
+   "questions": 41,
+   "clauses_present": 16
+  },
+  {
+   "chars": 101639,
+   "questions": 41,
+   "clauses_present": 19
+  },
+  {
+   "chars": 54866,
+   "questions": 41,
+   "clauses_present": 7
+  },
+  {
+   "chars": 221382,
+   "questions": 41,
+   "clauses_present": 24
+  },
+  {
+   "chars": 60618,
+   "questions": 41,
+   "clauses_present": 14
+  },
+  {
+   "chars": 13038,
+   "questions": 41,
+   "clauses_present": 8
+  },
+  {
+   "chars": 70898,
+   "questions": 41,
+   "clauses_present": 19
+  },
+  {
+   "chars": 19435,
+   "questions": 41,
+   "clauses_present": 15
+  },
+  {
+   "chars": 25246,
+   "questions": 41,
+   "clauses_present": 14
+  },
+  {
+   "chars": 26215,
+   "questions": 41,
+   "clauses_present": 15
+  },
+  {
+   "chars": 10891,
+   "questions": 41,
+   "clauses_present": 4
+  },
+  {
+   "chars": 25922,
+   "questions": 41,
+   "clauses_present": 7
+  },
+  {
+   "chars": 857,
+   "questions": 41,
+   "clauses_present": 4
+  },
+  {
+   "chars": 63439,
+   "questions": 41,
+   "clauses_present": 12
+  },
+  {
+   "chars": 42972,
+   "questions": 41,
+   "clauses_present": 18
+  },
+  {
+   "chars": 8052,
+   "questions": 41,
+   "clauses_present": 8
+  },
+  {
+   "chars": 300768,
+   "questions": 41,
+   "clauses_present": 28
+  },
+  {
+   "chars": 35189,
+   "questions": 41,
+   "clauses_present": 13
+  },
+  {
+   "chars": 972,
+   "questions": 41,
+   "clauses_present": 2
+  },
+  {
+   "chars": 25392,
+   "questions": 41,
+   "clauses_present": 7
+  },
+  {
+   "chars": 20637,
+   "questions": 41,
+   "clauses_present": 8
+  },
+  {
+   "chars": 19851,
+   "questions": 41,
+   "clauses_present": 8
+  },
+  {
+   "chars": 11355,
+   "questions": 41,
+   "clauses_present": 7
+  },
+  {
+   "chars": 63376,
+   "questions": 41,
+   "clauses_present": 13
+  },
+  {
+   "chars": 21955,
+   "questions": 41,
+   "clauses_present": 9
+  },
+  {
+   "chars": 19128,
+   "questions": 41,
+   "clauses_present": 12
+  },
+  {
+   "chars": 22090,
+   "questions": 41,
+   "clauses_present": 15
+  }
+ ],
+ "clause_prevalence": {
+  "Affiliate License-Licensee": {
+   "asked": 102,
+   "present": 12,
+   "rate": 0.11764705882352941
+  },
+  "Affiliate License-Licensor": {
+   "asked": 102,
+   "present": 6,
+   "rate": 0.058823529411764705
+  },
+  "Agreement Date": {
+   "asked": 102,
+   "present": 93,
+   "rate": 0.9117647058823529
+  },
+  "Anti-Assignment": {
+   "asked": 102,
+   "present": 72,
+   "rate": 0.7058823529411765
+  },
+  "Audit Rights": {
+   "asked": 102,
+   "present": 38,
+   "rate": 0.37254901960784315
+  },
+  "Cap On Liability": {
+   "asked": 102,
+   "present": 44,
+   "rate": 0.43137254901960786
+  },
+  "Change Of Control": {
+   "asked": 102,
+   "present": 26,
+   "rate": 0.2549019607843137
+  },
+  "Competitive Restriction Exception": {
+   "asked": 102,
+   "present": 16,
+   "rate": 0.1568627450980392
+  },
+  "Covenant Not To Sue": {
+   "asked": 102,
+   "present": 24,
+   "rate": 0.23529411764705882
+  },
+  "Document Name": {
+   "asked": 102,
+   "present": 102,
+   "rate": 1.0
+  },
+  "Effective Date": {
+   "asked": 102,
+   "present": 70,
+   "rate": 0.6862745098039216
+  },
+  "Exclusivity": {
+   "asked": 102,
+   "present": 33,
+   "rate": 0.3235294117647059
+  },
+  "Expiration Date": {
+   "asked": 102,
+   "present": 78,
+   "rate": 0.7647058823529411
+  },
+  "Governing Law": {
+   "asked": 102,
+   "present": 83,
+   "rate": 0.8137254901960784
+  },
+  "Insurance": {
+   "asked": 102,
+   "present": 32,
+   "rate": 0.3137254901960784
+  },
+  "Ip Ownership Assignment": {
+   "asked": 102,
+   "present": 23,
+   "rate": 0.22549019607843138
+  },
+  "Irrevocable Or Perpetual License": {
+   "asked": 102,
+   "present": 13,
+   "rate": 0.12745098039215685
+  },
+  "Joint Ip Ownership": {
+   "asked": 102,
+   "present": 7,
+   "rate": 0.06862745098039216
+  },
+  "License Grant": {
+   "asked": 102,
+   "present": 50,
+   "rate": 0.49019607843137253
+  },
+  "Liquidated Damages": {
+   "asked": 102,
+   "present": 14,
+   "rate": 0.13725490196078433
+  },
+  "Minimum Commitment": {
+   "asked": 102,
+   "present": 32,
+   "rate": 0.3137254901960784
+  },
+  "Most Favored Nation": {
+   "asked": 102,
+   "present": 3,
+   "rate": 0.029411764705882353
+  },
+  "No-Solicit Of Customers": {
+   "asked": 102,
+   "present": 7,
+   "rate": 0.06862745098039216
+  },
+  "No-Solicit Of Employees": {
+   "asked": 102,
+   "present": 10,
+   "rate": 0.09803921568627451
+  },
+  "Non-Compete": {
+   "asked": 102,
+   "present": 23,
+   "rate": 0.22549019607843138
+  },
+  "Non-Disparagement": {
+   "asked": 102,
+   "present": 7,
+   "rate": 0.06862745098039216
+  },
+  "Non-Transferable License": {
+   "asked": 102,
+   "present": 22,
+   "rate": 0.21568627450980393
+  },
+  "Notice Period To Terminate Renewal": {
+   "asked": 102,
+   "present": 16,
+   "rate": 0.1568627450980392
+  },
+  "Parties": {
+   "asked": 102,
+   "present": 102,
+   "rate": 1.0
+  },
+  "Post-Termination Services": {
+   "asked": 102,
+   "present": 29,
+   "rate": 0.28431372549019607
+  },
+  "Price Restrictions": {
+   "asked": 102,
+   "present": 0,
+   "rate": 0.0
+  },
+  "Renewal Term": {
+   "asked": 102,
+   "present": 26,
+   "rate": 0.2549019607843137
+  },
+  "Revenue/Profit Sharing": {
+   "asked": 102,
+   "present": 35,
+   "rate": 0.3431372549019608
+  },
+  "Rofr/Rofo/Rofn": {
+   "asked": 102,
+   "present": 17,
+   "rate": 0.16666666666666666
+  },
+  "Source Code Escrow": {
+   "asked": 102,
+   "present": 1,
+   "rate": 0.00980392156862745
+  },
+  "Termination For Convenience": {
+   "asked": 102,
+   "present": 29,
+   "rate": 0.28431372549019607
+  },
+  "Third Party Beneficiary": {
+   "asked": 102,
+   "present": 6,
+   "rate": 0.058823529411764705
+  },
+  "Uncapped Liability": {
+   "asked": 102,
+   "present": 13,
+   "rate": 0.12745098039215685
+  },
+  "Unlimited/All-You-Can-Eat-License": {
+   "asked": 102,
+   "present": 3,
+   "rate": 0.029411764705882353
+  },
+  "Volume Restriction": {
+   "asked": 102,
+   "present": 17,
+   "rate": 0.16666666666666666
+  },
+  "Warranty Duration": {
+   "asked": 102,
+   "present": 10,
+   "rate": 0.09803921568627451
+  }
+ }
+}
