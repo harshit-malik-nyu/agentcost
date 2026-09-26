@@ -68,6 +68,56 @@ ranking is:
 Lift is standard in credit and fraud scoring. It is essentially absent from how
 document-extraction agents are sold, which is on accuracy alone.
 
+### And a threshold read off that curve is not safe to deploy
+
+The capture curve above is a lift chart. It has been standard in credit scoring
+since the 1990s, and it has a defect that matters: **the review threshold it
+selects carries no guarantee on new data.**
+
+Measured over 300 split-sample deployments at a 5% error target:
+
+| Agent | Empirical threshold violates target | Risk-controlled violates | Review rate |
+|---|---:|---:|---|
+| Calibrated | **47.3%** | 6.7% | 5% → 7% |
+| Weakly calibrated | **49.0%** | 5.7% | 37% → **60%** |
+| Strongly calibrated | **27.0%** | 7.0% | 1% → 2% |
+
+A threshold tuned to hit 5% on a validation sample **exceeds it in roughly half
+of deployments**, because it is fitted to the mean of a quantity that varies.
+
+`conformal.py` replaces it with a distribution-free construction: a
+Clopper-Pearson upper bound on the selective risk at each of a pre-specified
+grid of thresholds, taking the most permissive one whose bound clears the
+target. The guarantee — selective risk ≤ α with probability ≥ 1−δ — holds
+regardless of how good the underlying agent is.
+
+**It is not free.** For the weakly calibrated agent, honest control requires
+60% review against the 37% the empirical curve suggests. That gap is the cost
+of a guarantee, and quoting the empirical number without it understates what
+running the process safely takes.
+
+#### On method, and what is not novel here
+
+None of the statistical machinery is new. Selective prediction was formalised
+by Geifman and El-Yaniv (2017); distribution-free risk control by Bates et al.
+(2021), extended to conformal risk control by Angelopoulos et al. (ICLR 2024)
+and Learn-then-Test (*Annals of Applied Statistics*, 2025). Applications to
+language models include conformal abstention for hallucination (Abbasi-Yadkori
+et al. 2024), prediction sets over multiple-choice answers (Kumar et al. 2023),
+open-ended generation (Quach et al. 2023) and selective conformal judging
+(SCOPE, 2026). Campos et al. (TACL 2024) survey the field.
+
+**What this repository contributes is the join**: applying a standard
+risk-control construction to the *human-review budget* rather than to
+prediction-set size, so the output is a staffing decision with a guarantee
+attached rather than an accuracy figure.
+
+One defect found while building it, recorded because it is subtle: the
+candidate threshold grid was originally derived from observed confidence
+values. That makes the selection order data-dependent and breaks
+fixed-sequence testing — violations ran at 10% against a 5% target, small and
+consistent. Fixing the grid to a pre-specified range restored nominal coverage.
+
 ---
 
 ## Two things that make accuracy claims hard to read

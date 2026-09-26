@@ -21,6 +21,11 @@ negligible survives any plausible values — it is three orders of magnitude awa
 
 ## 2. Calibration is simulated, not measured
 
+*(Partly addressed: the coverage experiment in `conformal.py` is a legitimate
+use of simulation, because the claim under test is a property of the
+statistical procedure rather than of any model. The objection below still
+stands for the calibration comparison itself.)*
+
 The headline comparison — a calibrated 85% agent beating a blind 95% one —
 comes from constructed answers with known calibration, not from a real agent's
 confidence scores.
@@ -103,11 +108,27 @@ rather than minutes, for instance.
 Every specific savings percentage. They rest on three unvalidated time
 estimates and a simulated calibration curve, and they should not be quoted.
 
+## 8. The contribution is a join, not a method
+
+Every piece of statistics here is off the shelf. Selective prediction,
+distribution-free risk control, Clopper-Pearson bounds, fixed-sequence testing
+— all standard, all decades old in their general form and several years old in
+their language-model application.
+
+What is assembled is an application: risk control aimed at a review budget
+rather than a prediction set. A reviewer entitled to be strict would call that
+engineering rather than research, and would be right.
+
 ## The objection I cannot answer
 
-Argument 2. Until a real agent's capture curve is measured, the headline
-comparison is a demonstration of a mechanism rather than a finding about any
-system anyone can buy.
+Argument 2. Until a real agent's capture curve is measured on this corpus, the
+headline comparison demonstrates a mechanism rather than establishing a fact
+about any system anyone can buy.
 
-That needs an evaluation run against the corpus with a real model, which needs
-API access this project does not have.
+That needs an evaluation run with a real model against the 4,182 expert-labelled
+questions, which needs API access this project does not have. It is roughly a
+day of work for anyone who has a key, and the harness is written and waiting.
+
+Until then the honest description is: **the cost structure is measured, the
+statistical machinery is validated, and the calibration of real agents is
+assumed.**
