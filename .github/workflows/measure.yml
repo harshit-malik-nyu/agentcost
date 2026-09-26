@@ -35,6 +35,10 @@ jobs:
 
       - name: Measure
         run: |
+          # tee cannot create a directory, and git does not track empty ones,
+          # so evidence/ is absent from a fresh checkout. Three runs died on
+          # this line before the timeout was ever reached.
+          mkdir -p evidence
           # Scope set by measured throughput, not optimism. A 6,400-token
           # contract at stride 128 is ~25 windows per question and 41 questions
           # per contract, so roughly a thousand CPU forward passes each. The

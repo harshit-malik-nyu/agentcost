@@ -1,0 +1,5 @@
+Evidence written by scripts/run and CI lives here.
+
+This file exists because git does not track empty directories. Without it a
+fresh checkout has no evidence/, and any CI step redirecting output into it
+fails before doing any work — which is exactly what happened three times.
