@@ -153,3 +153,38 @@ class TestNaiveBaseline:
     def test_naive_accepts_more_than_risk_control(self):
         answers = simulate(0.90, 0.7, n=1000, seed=2)
         assert naive_threshold(answers, 0.05) <= control_risk(answers, 0.05).threshold
+
+
+class TestBoundChoice:
+    """
+    The choice of concentration bound is itself a cost decision, and making it
+    visible is the point of keeping both.
+    """
+
+    def test_hoeffding_is_valid_but_much_looser(self):
+        from agentcost.conformal import bound_comparison
+        for k, n in [(0, 50), (0, 100), (1, 200), (5, 500)]:
+            b = bound_comparison(k, n)
+            assert b["hoeffding"] > b["clopper_pearson"]
+            assert b["hoeffding_penalty"] > 1.5
+
+    def test_both_bounds_exceed_the_observed_rate(self):
+        from agentcost.conformal import bound_comparison
+        b = bound_comparison(5, 500)
+        assert b["clopper_pearson"] > b["observed_rate"]
+        assert b["hoeffding"] > b["observed_rate"]
+
+    def test_the_gap_narrows_with_sample_size(self):
+        """
+        Hoeffding's penalty is worst where a strict threshold lives — small
+        accepted sets with near-zero errors — which is precisely why the exact
+        bound was chosen.
+        """
+        from agentcost.conformal import bound_comparison
+        small = bound_comparison(0, 50)["hoeffding_penalty"]
+        large = bound_comparison(20, 1000)["hoeffding_penalty"]
+        assert small > large
+
+    def test_hoeffding_handles_the_empty_set(self):
+        from agentcost.conformal import hoeffding_upper
+        assert hoeffding_upper(0, 0) == 1.0

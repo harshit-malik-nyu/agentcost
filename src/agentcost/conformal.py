@@ -228,6 +228,34 @@ def naive_threshold(answers, alpha: float = 0.05, grid: int = 200) -> float:
     return best
 
 
+def hoeffding_upper(k: int, n: int, delta: float = 0.05) -> float:
+    """
+    Hoeffding upper bound, kept for comparison rather than for use.
+
+    Distribution-free and far looser than Clopper-Pearson at the sample sizes
+    a strict threshold produces. Included so the choice of bound is visible as
+    a choice: a reader who prefers Hoeffding can see exactly what it costs in
+    extra review, which at n=100 with zero errors is roughly four times the
+    accepted risk.
+    """
+    import math
+    if n == 0:
+        return 1.0
+    return min(1.0, k / n + math.sqrt(math.log(1 / delta) / (2 * n)))
+
+
+def bound_comparison(k: int, n: int, delta: float = 0.05) -> dict:
+    """Both bounds side by side, so the conservatism is legible."""
+    cp = clopper_pearson_upper(k, n, delta)
+    hoef = hoeffding_upper(k, n, delta)
+    return {
+        "observed_rate": k / n if n else 0.0,
+        "clopper_pearson": cp,
+        "hoeffding": hoef,
+        "hoeffding_penalty": (hoef / cp) if cp else float("inf"),
+    }
+
+
 # ---------------------------------------------------------------------------
 # Coverage validation
 # ---------------------------------------------------------------------------
