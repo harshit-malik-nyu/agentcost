@@ -19,12 +19,31 @@ the human baseline drops and the case narrows.
 negligible survives any plausible values — it is three orders of magnitude away
 — but the specific savings figures do not.
 
-## 2. Calibration is simulated, not measured
+## 2. Calibration is simulated, not measured — since addressed
 
-*(Partly addressed: the coverage experiment in `conformal.py` is a legitimate
-use of simulation, because the claim under test is a property of the
-statistical procedure rather than of any model. The objection below still
-stands for the calibration comparison itself.)*
+This originally read: the headline comparison comes from constructed answers,
+so it demonstrates a mechanism and establishes nothing about a real system.
+
+A real model has now been measured. RoBERTa fine-tuned on CUAD, 492 questions,
+12 contracts: **lift 0.00×**, with errors concentrated at the top of the
+confidence ranking rather than the bottom. Reviewing the least-confident
+quarter catches none of the sixteen errors.
+
+That is a stronger result than the simulation, and it cuts against the
+optimistic reading: the first real model tested cannot triage its own work at
+all.
+
+**New weaknesses the measurement introduces**, which now need stating:
+
+- 492 questions and 16 errors is a small sample. The lift estimate has a wide
+  interval, though the direction — no useful ranking — is unambiguous.
+- Contexts were truncated to 4,000 characters, raising the majority-class
+  baseline to 90.2% and making the task easier than a full contract.
+- Confidence is the softmax margin between best span and null span. It is the
+  natural signal for this architecture but not the only one; span probability
+  or an ensemble might rank errors better. This measures a practitioner's
+  default, not the best achievable.
+- One model, one architecture, one task.
 
 The headline comparison — a calibrated 85% agent beating a blind 95% one —
 comes from constructed answers with known calibration, not from a real agent's

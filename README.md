@@ -50,6 +50,10 @@ This is the part that inverts the usual pitch.
 | **85% accurate, ranks errors well** | **15%** | **$1.36** | **96%** |
 | 95% accurate and ranks errors well | 6% | $0.56 | 98% |
 
+*(These three rows are constructed, to isolate the mechanism. The measured row
+— a real model, with real confidence scores — is below, and it lands in the
+first category.)*
+
 **A worse model that knows when it is wrong is six times cheaper to run than a
 better model that does not.**
 
@@ -67,6 +71,66 @@ ranking is:
 
 Lift is standard in credit and fraud scoring. It is essentially absent from how
 document-extraction agents are sold, which is on accuracy alone.
+
+### Measured on a real model: the confidence is worse than useless
+
+Everything above about calibration was a mechanism. Here is a measurement.
+
+**RoBERTa fine-tuned on CUAD** (`akdeniz27/roberta-base-cuad`), run over 492
+questions from 12 real contracts. Confidence is the softmax margin between the
+best answer span and the null span — the natural signal for this architecture,
+and the one a practitioner would use.
+
+| | |
+|---|---:|
+| Accuracy | 96.7% |
+| Majority-class baseline | 90.2% |
+| Errors | 16 of 492 |
+| **Lift over random ranking** | **0.00×** |
+
+The lift is zero, and the reason is worse than a null result:
+
+| Review the least-confident… | Errors caught |
+|---|---:|
+| 5% | **0 of 16** |
+| 10% | **0 of 16** |
+| 25% | **0 of 16** |
+| 50% | 1 of 16 |
+
+**The model's errors are concentrated at the top of its confidence ranking, not
+the bottom.** Sorting by confidence to decide what to review is not merely
+uninformative here — it is anti-correlated with error.
+
+The confidence distribution shows why. It is degenerate: 444 of 492 answers sit
+at essentially 0.0 and 43 at essentially 1.0, with five values in between. The
+model is almost never uncertain. And its mistakes look like this:
+
+| Confidence | Clause present? | Predicted |
+|---:|---|---|
+| 1.0000 | no | `6th day of April, 1999` |
+| 1.0000 | yes | `OCTOBER 15, 2009` |
+| 1.0000 | yes | `NFLA-NC` |
+| 0.9999 | no | `, 2013,` |
+
+Fabricating a date with perfect confidence, and emitting `, 2013,` as a clause
+with confidence 0.9999.
+
+**What this means for the economics.** This agent is the "blind" row of the
+table above. It cannot triage its own work, so the review rate that hits any
+error tolerance is close to 100%, and the saving collapses from the 96% a
+calibrated agent would deliver to the 73% available from verification speed
+alone.
+
+**What it does not establish.** One model, 492 questions, 16 errors — a small
+sample. Contexts were truncated to 4,000 characters, which raises the
+majority-class baseline to 90.2% and makes the task easier than the full
+document. A different confidence estimator — span probability rather than the
+null margin, or an ensemble — might rank errors better, and this measures the
+natural signal rather than the best possible one.
+
+What it does establish is that **useful calibration cannot be assumed.** The
+first real model tested has none, and an automation business case built on
+selective review would have been wrong about its central input.
 
 ### And a threshold read off that curve is not safe to deploy
 
