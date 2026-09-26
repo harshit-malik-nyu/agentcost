@@ -2,12 +2,13 @@
   "models": [
     {
       "method": {
+        "task": "cuad",
         "model": "akdeniz27/roberta-base-cuad",
         "context_chars_used": 4000,
         "contracts_evaluated": 10,
         "questions": 410,
         "truncated": false,
-        "seconds": 205.12470936775208,
+        "seconds": 205.21540784835815,
         "min_confidence_to_answer": 0.05
       },
       "by_estimator": [
@@ -517,12 +518,13 @@
     },
     {
       "method": {
+        "task": "cuad",
         "model": "Rakib/roberta-base-on-cuad",
         "context_chars_used": 4000,
         "contracts_evaluated": 10,
         "questions": 410,
         "truncated": false,
-        "seconds": 204.7228763103485,
+        "seconds": 204.95708966255188,
         "min_confidence_to_answer": 0.05
       },
       "by_estimator": [
@@ -1032,12 +1034,13 @@
     },
     {
       "method": {
+        "task": "cuad",
         "model": "marshmellow77/roberta-base-cuad",
         "context_chars_used": 4000,
         "contracts_evaluated": 10,
         "questions": 410,
         "truncated": false,
-        "seconds": 204.96245908737183,
+        "seconds": 204.33125519752502,
         "min_confidence_to_answer": 0.05
       },
       "by_estimator": [

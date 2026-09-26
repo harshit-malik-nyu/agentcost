@@ -1,7 +1,7 @@
-corpus: 102 contracts
+corpus [cuad]: 102 documents
 loading akdeniz27/roberta-base-cuad (CPU) ...
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 21553.13it/s]
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 22116.23it/s]
 budget 600s for up to 10 contracts
   contract 1: 4,000 chars (of 11,475), 41 questions
   1 contracts, 41 questions, 21s
@@ -23,14 +23,38 @@ budget 600s for up to 10 contracts
   9 contracts, 369 questions, 185s
   contract 10: 4,000 chars (of 27,741), 41 questions
   10 contracts, 410 questions, 205s
-corpus: 102 contracts
+corpus [cuad]: 102 documents
 loading Rakib/roberta-base-on-cuad (CPU) ...
-Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 11673.66it/s]
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 8206.09it/s]
 budget 600s for up to 10 contracts
   contract 1: 4,000 chars (of 11,475), 41 questions
   1 contracts, 41 questions, 21s
   contract 2: 4,000 chars (of 15,176), 41 questions
   2 contracts, 82 questions, 42s
+  contract 3: 4,000 chars (of 175,580), 41 questions
+  3 contracts, 123 questions, 62s
+  contract 4: 4,000 chars (of 145,168), 41 questions
+  4 contracts, 164 questions, 83s
+  contract 5: 4,000 chars (of 4,871), 41 questions
+  5 contracts, 205 questions, 103s
+  contract 6: 4,000 chars (of 30,968), 41 questions
+  6 contracts, 246 questions, 123s
+  contract 7: 4,000 chars (of 17,917), 41 questions
+  7 contracts, 287 questions, 144s
+  contract 8: 4,000 chars (of 25,288), 41 questions
+  8 contracts, 328 questions, 164s
+  contract 9: 4,000 chars (of 11,770), 41 questions
+  9 contracts, 369 questions, 185s
+  contract 10: 4,000 chars (of 27,741), 41 questions
+  10 contracts, 410 questions, 205s
+corpus [cuad]: 102 documents
+loading marshmellow77/roberta-base-cuad (CPU) ...
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 9239.58it/s]
+budget 600s for up to 10 contracts
+  contract 1: 4,000 chars (of 11,475), 41 questions
+  1 contracts, 41 questions, 21s
+  contract 2: 4,000 chars (of 15,176), 41 questions
+  2 contracts, 82 questions, 41s
   contract 3: 4,000 chars (of 175,580), 41 questions
   3 contracts, 123 questions, 62s
   contract 4: 4,000 chars (of 145,168), 41 questions
@@ -46,31 +70,7 @@ budget 600s for up to 10 contracts
   contract 9: 4,000 chars (of 11,770), 41 questions
   9 contracts, 369 questions, 184s
   contract 10: 4,000 chars (of 27,741), 41 questions
-  10 contracts, 410 questions, 205s
-corpus: 102 contracts
-loading marshmellow77/roberta-base-cuad (CPU) ...
-Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 9528.37it/s]
-budget 600s for up to 10 contracts
-  contract 1: 4,000 chars (of 11,475), 41 questions
-  1 contracts, 41 questions, 21s
-  contract 2: 4,000 chars (of 15,176), 41 questions
-  2 contracts, 82 questions, 41s
-  contract 3: 4,000 chars (of 175,580), 41 questions
-  3 contracts, 123 questions, 62s
-  contract 4: 4,000 chars (of 145,168), 41 questions
-  4 contracts, 164 questions, 82s
-  contract 5: 4,000 chars (of 4,871), 41 questions
-  5 contracts, 205 questions, 103s
-  contract 6: 4,000 chars (of 30,968), 41 questions
-  6 contracts, 246 questions, 123s
-  contract 7: 4,000 chars (of 17,917), 41 questions
-  7 contracts, 287 questions, 144s
-  contract 8: 4,000 chars (of 25,288), 41 questions
-  8 contracts, 328 questions, 164s
-  contract 9: 4,000 chars (of 11,770), 41 questions
-  9 contracts, 369 questions, 185s
-  contract 10: 4,000 chars (of 27,741), 41 questions
-  10 contracts, 410 questions, 205s
+  10 contracts, 410 questions, 204s
 
 ==========================================================================
   CONFIDENCE ESTIMATOR COMPARISON  (lift > 1 means errors rank low)
