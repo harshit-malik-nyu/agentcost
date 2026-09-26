@@ -99,6 +99,24 @@ holds up a timeline — negotiation, approvals and counterparty response are. A
 96% saving on a step that is not on the critical path is worth less than the
 percentage suggests.
 
+## 7a. The mechanism is task-dependent, and the fix mostly is too
+
+Tested on SQuAD v2 across three architectures, the explanation offered for the
+CUAD result came back half wrong.
+
+The error asymmetry reverses: CUAD models are eight times likelier to err when
+an answer is present, SQuAD models twice as likely when it is absent. So
+"errors concentrate where the model has found something" describes CUAD, not
+extraction generally.
+
+The fix degrades badly too — trained lift 4.10–5.56 on CUAD against 1.09–1.24
+per architecture on SQuAD. A reader would be right to say the recovery result
+is a CUAD result, not a general one.
+
+What survives both: raw confidence ranks errors worse than random on every
+model and both tasks, and ranking reappears inside the answer-present subset at
+roughly 3x on both. That is a narrower claim than the one originally made.
+
 ## 7. One process, generalised
 
 Everything here is one document-extraction task. The claim that inference is

@@ -171,6 +171,53 @@ figure, and do not trust a raw confidence score for triage. Ask for the capture
 curve, and if it is flat, ask whether they have tried fitting one — because on
 the evidence here the signal exists and is simply not being used.
 
+### Tested on a second task: the prediction was partly wrong
+
+The mechanism above makes a falsifiable claim. If confidence encodes *presence*
+and pooled ranking collapses because presence dominates, then a balanced task
+should behave differently. CUAD is 90% unanswerable; **SQuAD v2 is 50%**.
+
+Three architectures were run on it — RoBERTa, BERT and ELECTRA — through the
+identical measurement code, 7,905 answers and 2,019 errors.
+
+| | CUAD | SQuAD v2 |
+|---|---:|---:|
+| Unanswerable share | 90% | 50% |
+| Error rate, answer present | **21.8%** | 17.8% |
+| Error rate, answer absent | **2.8%** | **33.6%** |
+| Pooled raw lift | 0.00 | 0.25 |
+| Lift within present-answer subset | 3.51 / 1.89 / 2.43 | 3.14 / 2.60 / 2.81 |
+| Trained lift, per architecture | 4.10, 5.56 | **1.09, 1.20, 1.24** |
+
+**What held.** Raw confidence is worse than random for triage on both tasks —
+every pooled lift is below 1.0, meaning sorting by confidence is *worse* than
+sorting at random. And ranking reappears inside the present-answer subset on
+both, at roughly 3x, exactly as predicted.
+
+**What did not.** The error asymmetry **reverses**. On CUAD the model is eight
+times more likely to be wrong when an answer is present; on SQuAD it is twice
+as likely to be wrong when the answer is **absent** — hallucinating answers to
+unanswerable questions rather than mis-extracting present ones.
+
+So the specific story — *errors concentrate where the model has found
+something* — is a property of CUAD, not a general one. The defensible
+generalisation is weaker and stated as such: **confidence tracks something
+systematic that is orthogonal to correctness**, and which something it is
+depends on the task.
+
+**And the fix is much weaker off CUAD.** Trained lift falls from 4.10–5.56 to
+1.09–1.24. A calibrator recovers most of the signal on contract extraction and
+barely any on SQuAD. The pooled SQuAD figure of 2.68 is higher than any
+individual model's, which is an artefact worth naming: pooling three models of
+differing accuracy lets the calibrator discriminate between models rather than
+between correct and incorrect answers. The per-architecture numbers are the
+honest ones.
+
+**Why this is reported rather than buried.** The prediction was made before the
+run and it came back half wrong. A confirmed prediction would have been a
+cleaner story and a weaker result — this one bounds the claim, which is what
+the second task was for.
+
 #### Scope, stated narrowly
 
 A third checkpoint, `marshmellow77/roberta-base-cuad`, returned byte-identical
