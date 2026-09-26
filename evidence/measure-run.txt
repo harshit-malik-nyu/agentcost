@@ -1,0 +1,22 @@
+fetching https://raw.githubusercontent.com/The-Atticus-Project/cuad/main/data.zip ...
+corpus: 102 contracts
+loading akdeniz27/roberta-base-cuad (CPU) ...
+Traceback (most recent call last):
+  File "/home/runner/work/agentcost/agentcost/scripts/measure_real_agent.py", line 278, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/work/agentcost/agentcost/scripts/measure_real_agent.py", line 244, in main
+    meta = run(args.model, args.contracts, args.budget, raw,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/agentcost/agentcost/scripts/measure_real_agent.py", line 123, in run
+    qa = pipeline("question-answering", model=model_name, device=-1)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/transformers/pipelines/__init__.py", line 977, in pipeline
+    normalized_task, targeted_task, task_options = check_task(task)
+                                                   ^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/transformers/pipelines/__init__.py", line 359, in check_task
+    return PIPELINE_REGISTRY.check_task(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/transformers/pipelines/base.py", line 1364, in check_task
+    raise KeyError(f"Unknown task {task}, available tasks are {self.get_supported_tasks()}")
+KeyError: "Unknown task question-answering, available tasks are ['any-to-any', 'audio-classification', 'automatic-speech-recognition', 'depth-estimation', 'document-question-answering', 'feature-extraction', 'fill-mask', 'image-classification', 'image-feature-extraction', 'image-segmentation', 'image-text-to-text', 'keypoint-matching', 'mask-generation', 'ner', 'object-detection', 'sentiment-analysis', 'table-question-answering', 'text-classification', 'text-generation', 'text-to-audio', 'text-to-speech', 'token-classification', 'video-classification', 'zero-shot-audio-classification', 'zero-shot-classification', 'zero-shot-image-classification', 'zero-shot-object-detection']"
