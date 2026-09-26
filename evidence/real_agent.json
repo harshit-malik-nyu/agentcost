@@ -1,0 +1,554 @@
+{
+  "method": {
+    "model": "akdeniz27/roberta-base-cuad",
+    "context_chars_used": 4000,
+    "contracts_evaluated": 12,
+    "questions": 492,
+    "truncated": false,
+    "seconds": 246.2535412311554,
+    "min_confidence_to_answer": 0.05
+  },
+  "accuracy": 0.967479674796748,
+  "majority_class_baseline": 0.9024390243902439,
+  "lift_at_error_rate": 0.0,
+  "review_for_90pct_capture": 0.975609756097561,
+  "review_for_95pct_capture": 0.991869918699187,
+  "capture_curve": [
+    {
+      "review_rate": 0.008130081300813009,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.016260162601626018,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.024390243902439025,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.032520325203252036,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.04065040650406504,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.04878048780487805,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.056910569105691054,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.06504065040650407,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.07317073170731707,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.08130081300813008,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.08943089430894309,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.0975609756097561,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.10569105691056911,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.11382113821138211,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.12195121951219512,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.13008130081300814,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.13821138211382114,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.14634146341463414,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.15447154471544716,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.16260162601626016,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.17073170731707318,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.17886178861788618,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.18699186991869918,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.1951219512195122,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.2032520325203252,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.21138211382113822,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.21951219512195122,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.22764227642276422,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.23577235772357724,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.24390243902439024,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.25203252032520324,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.2601626016260163,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.2682926829268293,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.2764227642276423,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.2845528455284553,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.2926829268292683,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.3008130081300813,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.3089430894308943,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.3170731707317073,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.3252032520325203,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.3333333333333333,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.34146341463414637,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.34959349593495936,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.35772357723577236,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.36585365853658536,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.37398373983739835,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.3821138211382114,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.3902439024390244,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.3983739837398374,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.4065040650406504,
+      "errors_caught": 0.0
+    },
+    {
+      "review_rate": 0.4146341463414634,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.42276422764227645,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.43089430894308944,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.43902439024390244,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.44715447154471544,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.45528455284552843,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.4634146341463415,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.4715447154471545,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.4796747967479675,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.4878048780487805,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.4959349593495935,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.5040650406504065,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.5121951219512195,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.5203252032520326,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.5284552845528455,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.5365853658536586,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.5447154471544715,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.5528455284552846,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.5609756097560976,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.5691056910569106,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.5772357723577236,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.5853658536585366,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.5934959349593496,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.6016260162601627,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.6097560975609756,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.6178861788617886,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.6260162601626016,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.6341463414634146,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.6422764227642277,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.6504065040650406,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.6585365853658537,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.6666666666666666,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.6747967479674797,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.6829268292682927,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.6910569105691057,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.6991869918699187,
+      "errors_caught": 0.0625
+    },
+    {
+      "review_rate": 0.7073170731707317,
+      "errors_caught": 0.125
+    },
+    {
+      "review_rate": 0.7154471544715447,
+      "errors_caught": 0.125
+    },
+    {
+      "review_rate": 0.7235772357723578,
+      "errors_caught": 0.125
+    },
+    {
+      "review_rate": 0.7317073170731707,
+      "errors_caught": 0.125
+    },
+    {
+      "review_rate": 0.7398373983739838,
+      "errors_caught": 0.125
+    },
+    {
+      "review_rate": 0.7479674796747967,
+      "errors_caught": 0.125
+    },
+    {
+      "review_rate": 0.7560975609756098,
+      "errors_caught": 0.125
+    },
+    {
+      "review_rate": 0.7642276422764228,
+      "errors_caught": 0.125
+    },
+    {
+      "review_rate": 0.7723577235772358,
+      "errors_caught": 0.125
+    },
+    {
+      "review_rate": 0.7804878048780488,
+      "errors_caught": 0.125
+    },
+    {
+      "review_rate": 0.7886178861788617,
+      "errors_caught": 0.125
+    },
+    {
+      "review_rate": 0.7967479674796748,
+      "errors_caught": 0.1875
+    },
+    {
+      "review_rate": 0.8048780487804879,
+      "errors_caught": 0.1875
+    },
+    {
+      "review_rate": 0.8130081300813008,
+      "errors_caught": 0.1875
+    },
+    {
+      "review_rate": 0.8211382113821138,
+      "errors_caught": 0.1875
+    },
+    {
+      "review_rate": 0.8292682926829268,
+      "errors_caught": 0.1875
+    },
+    {
+      "review_rate": 0.8373983739837398,
+      "errors_caught": 0.1875
+    },
+    {
+      "review_rate": 0.8455284552845529,
+      "errors_caught": 0.1875
+    },
+    {
+      "review_rate": 0.8536585365853658,
+      "errors_caught": 0.1875
+    },
+    {
+      "review_rate": 0.8617886178861789,
+      "errors_caught": 0.1875
+    },
+    {
+      "review_rate": 0.8699186991869918,
+      "errors_caught": 0.1875
+    },
+    {
+      "review_rate": 0.8780487804878049,
+      "errors_caught": 0.25
+    },
+    {
+      "review_rate": 0.8861788617886179,
+      "errors_caught": 0.25
+    },
+    {
+      "review_rate": 0.8943089430894309,
+      "errors_caught": 0.3125
+    },
+    {
+      "review_rate": 0.9024390243902439,
+      "errors_caught": 0.375
+    },
+    {
+      "review_rate": 0.9105691056910569,
+      "errors_caught": 0.5625
+    },
+    {
+      "review_rate": 0.9186991869918699,
+      "errors_caught": 0.625
+    },
+    {
+      "review_rate": 0.926829268292683,
+      "errors_caught": 0.6875
+    },
+    {
+      "review_rate": 0.9349593495934959,
+      "errors_caught": 0.8125
+    },
+    {
+      "review_rate": 0.943089430894309,
+      "errors_caught": 0.8125
+    },
+    {
+      "review_rate": 0.9512195121951219,
+      "errors_caught": 0.8125
+    },
+    {
+      "review_rate": 0.959349593495935,
+      "errors_caught": 0.875
+    },
+    {
+      "review_rate": 0.967479674796748,
+      "errors_caught": 0.875
+    },
+    {
+      "review_rate": 0.975609756097561,
+      "errors_caught": 0.9375
+    },
+    {
+      "review_rate": 0.983739837398374,
+      "errors_caught": 0.9375
+    },
+    {
+      "review_rate": 0.991869918699187,
+      "errors_caught": 1.0
+    },
+    {
+      "review_rate": 1.0,
+      "errors_caught": 1.0
+    }
+  ],
+  "risk_controlled": {
+    "alpha=0.01": {
+      "threshold": 1.000000001,
+      "alpha": 0.01,
+      "delta": 0.05,
+      "review_rate": 1.0,
+      "empirical_selective_risk": 0.0,
+      "risk_upper_bound": 0.0,
+      "n_calibration": 246,
+      "n_accepted": 0,
+      "feasible": false,
+      "realised_risk_on_heldout": 0.0,
+      "held_out_accepted": 0,
+      "respected_target": true
+    },
+    "alpha=0.05": {
+      "threshold": 0.0,
+      "alpha": 0.05,
+      "delta": 0.05,
+      "review_rate": 0.0,
+      "empirical_selective_risk": 0.024390243902439025,
+      "risk_upper_bound": 0.047569588177432544,
+      "n_calibration": 246,
+      "n_accepted": 246,
+      "feasible": true,
+      "realised_risk_on_heldout": 0.04065040650406504,
+      "held_out_accepted": 246,
+      "respected_target": true
+    },
+    "alpha=0.1": {
+      "threshold": 0.0,
+      "alpha": 0.1,
+      "delta": 0.05,
+      "review_rate": 0.0,
+      "empirical_selective_risk": 0.024390243902439025,
+      "risk_upper_bound": 0.047569588177432544,
+      "n_calibration": 246,
+      "n_accepted": 246,
+      "feasible": true,
+      "realised_risk_on_heldout": 0.04065040650406504,
+      "held_out_accepted": 246,
+      "respected_target": true
+    }
+  }
+}

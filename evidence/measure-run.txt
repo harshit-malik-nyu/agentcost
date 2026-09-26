@@ -1,22 +1,43 @@
-fetching https://raw.githubusercontent.com/The-Atticus-Project/cuad/main/data.zip ...
 corpus: 102 contracts
 loading akdeniz27/roberta-base-cuad (CPU) ...
-Traceback (most recent call last):
-  File "/home/runner/work/agentcost/agentcost/scripts/measure_real_agent.py", line 278, in <module>
-    sys.exit(main())
-             ^^^^^^
-  File "/home/runner/work/agentcost/agentcost/scripts/measure_real_agent.py", line 244, in main
-    meta = run(args.model, args.contracts, args.budget, raw,
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/agentcost/agentcost/scripts/measure_real_agent.py", line 123, in run
-    qa = pipeline("question-answering", model=model_name, device=-1)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/transformers/pipelines/__init__.py", line 977, in pipeline
-    normalized_task, targeted_task, task_options = check_task(task)
-                                                   ^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/transformers/pipelines/__init__.py", line 359, in check_task
-    return PIPELINE_REGISTRY.check_task(task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/transformers/pipelines/base.py", line 1364, in check_task
-    raise KeyError(f"Unknown task {task}, available tasks are {self.get_supported_tasks()}")
-KeyError: "Unknown task question-answering, available tasks are ['any-to-any', 'audio-classification', 'automatic-speech-recognition', 'depth-estimation', 'document-question-answering', 'feature-extraction', 'fill-mask', 'image-classification', 'image-feature-extraction', 'image-segmentation', 'image-text-to-text', 'keypoint-matching', 'mask-generation', 'ner', 'object-detection', 'sentiment-analysis', 'table-question-answering', 'text-classification', 'text-generation', 'text-to-audio', 'text-to-speech', 'token-classification', 'video-classification', 'zero-shot-audio-classification', 'zero-shot-classification', 'zero-shot-image-classification', 'zero-shot-object-detection']"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 21821.92it/s]
+budget 1200s for up to 12 contracts
+  contract 1: 4,000 chars (of 11,475), 41 questions
+  1 contracts, 41 questions, 20s
+  contract 2: 4,000 chars (of 15,176), 41 questions
+  2 contracts, 82 questions, 41s
+  contract 3: 4,000 chars (of 175,580), 41 questions
+  3 contracts, 123 questions, 61s
+  contract 4: 4,000 chars (of 145,168), 41 questions
+  4 contracts, 164 questions, 82s
+  contract 5: 4,000 chars (of 4,871), 41 questions
+  5 contracts, 205 questions, 102s
+  contract 6: 4,000 chars (of 30,968), 41 questions
+  6 contracts, 246 questions, 123s
+  contract 7: 4,000 chars (of 17,917), 41 questions
+  7 contracts, 287 questions, 144s
+  contract 8: 4,000 chars (of 25,288), 41 questions
+  8 contracts, 328 questions, 164s
+  contract 9: 4,000 chars (of 11,770), 41 questions
+  9 contracts, 369 questions, 185s
+  contract 10: 4,000 chars (of 27,741), 41 questions
+  10 contracts, 410 questions, 205s
+  contract 11: 4,000 chars (of 40,442), 41 questions
+  11 contracts, 451 questions, 226s
+  contract 12: 3,456 chars (of 3,456), 41 questions
+  12 contracts, 492 questions, 246s
+
+==================================================================
+  model              : akdeniz27/roberta-base-cuad
+  questions scored   : 492 over 12 contracts
+  context per doc    : 4,000 chars (truncated)
+  accuracy           : 96.7%
+  majority baseline  : 90.2%
+  lift over random   : 0.00x
+  review for 95% capture: 99.2%
+
+  alpha=0.01: review 100.0%, held-out risk 0.000, target respected: True
+  alpha=0.05: review 0.0%, held-out risk 0.041, target respected: True
+  alpha=0.1: review 0.0%, held-out risk 0.041, target respected: True
+==================================================================
