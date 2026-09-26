@@ -117,6 +117,60 @@ error tolerance is near 100%, and the saving collapses from the 96% a
 calibrated agent would deliver to the 73% available from verification speed
 alone.
 
+### Why the signal is absent — and it is recoverable
+
+A negative result without a mechanism is weak. Two further experiments, on the
+same data.
+
+**Where the errors sit.** They are not uniform. The model is **eight times more
+likely to be wrong when a clause is actually present**:
+
+| | Error rate | n |
+|---|---:|---:|
+| Clause present | **21.8%** | 78 |
+| Clause absent | 2.8% | 742 |
+
+And five of forty-one clause types hold **66%** of all errors — led by
+Effective Date (45% wrong), Parties (30%) and Expiration Date (20%).
+
+**The mechanism.** Confidence encodes *whether something is there*, which the
+model judges well, not *whether the extracted span is right*, which it judges
+badly. Because 90% of questions have nothing to find, accuracy is carried
+almost entirely by correct declining, and the errors concentrate in the
+minority of cases where the model has found something and is therefore
+uniformly confident.
+
+That hypothesis predicts something testable: ranking should reappear inside the
+present-clause subset, where the presence signal no longer dominates. It does.
+
+| Signal | Lift, pooled | Lift within present-clause subset |
+|---|---:|---:|
+| `null_margin` | 0.00 | **3.51** |
+| `span_prob` | 0.00 | **1.89** |
+| `start_end` | 0.00 | **2.43** |
+
+**The fix.** If the information is present but badly expressed, a trained
+combination should recover it. A logistic regression over the same signals,
+five-fold cross-validated, with clause base rates computed **per training fold**
+so no held-out label leaks through a feature:
+
+| | Lift |
+|---|---:|
+| Raw `null_margin` | **0.00** |
+| Trained on the three confidence signals alone | **4.56** |
+| Trained with cheap deployment features | **7.21** |
+
+**The information was there the whole time.** Raw confidence cannot rank
+errors; a linear combination of exactly the same numbers ranks them well. This
+is an engineering problem, not a capability ceiling — and it moves the agent
+from the "blind" row of the cost table to the "calibrated" row, from a 75%
+saving to something near 96%.
+
+**What a buyer should take from this.** Do not ask a vendor for an accuracy
+figure, and do not trust a raw confidence score for triage. Ask for the capture
+curve, and if it is flat, ask whether they have tried fitting one — because on
+the evidence here the signal exists and is simply not being used.
+
 #### Scope, stated narrowly
 
 A third checkpoint, `marshmellow77/roberta-base-cuad`, returned byte-identical
@@ -124,8 +178,10 @@ results to `akdeniz27` — same accuracy, same error count, same distinct-value
 counts. It is the same weights mirrored, so this is **two distinct models, not
 three**, and the run says so rather than counting it as independent evidence.
 
-Other limits: 38 errors across 820 questions is a small sample, and the lift
-estimate carries a wide interval — though zero of fourteen and one of
+Other limits: 38 errors across 820 questions is a small sample — roughly seven
+or eight errors per cross-validation fold, so the trained-lift estimate carries
+a wide interval even though its direction is consistent across folds. The lift
+estimate generally carries a wide interval — though zero of fourteen and one of
 twenty-four in the bottom quartile is not an ambiguous direction. Contexts were
 truncated to 4,000 characters, which raises the majority-class baseline to
 about 90% and makes the task easier than a full contract. Both models share an

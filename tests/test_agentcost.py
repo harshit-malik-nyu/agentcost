@@ -277,3 +277,76 @@ class TestSimulation:
         import agentcost.calibration as cal
         doc = " ".join(cal.simulate.__doc__.split())
         assert "never reported as a finding" in doc
+
+
+class TestMechanismAndFix:
+    """
+    The two experiments that turn a negative result into an explained one.
+    Run against the committed measurement if it is present.
+    """
+
+    @pytest.fixture(scope="class")
+    def records(self):
+        import json
+        recs = []
+        for p in (ROOT / "evidence").glob("real_agent.*.json"):
+            if p.name.endswith("records.json"):
+                continue
+            try:
+                d = json.loads(p.read_text())
+            except json.JSONDecodeError:
+                continue
+            if isinstance(d, list):
+                recs.extend(d)
+        if not recs:
+            pytest.skip("no committed measurement")
+        return recs
+
+    def _module(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "am", ROOT / "scripts" / "analyse_mechanism.py")
+        m = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(m)
+        return m
+
+    def test_errors_concentrate_on_present_clauses(self, records):
+        """
+        The mechanism: confidence encodes presence, which the model judges
+        well, not correctness, which it does not.
+        """
+        m = self._module().mechanism(records)
+        assert (m["error_rate_when_clause_present"]
+                > 3 * m["error_rate_when_clause_absent"])
+
+    def test_ranking_reappears_inside_the_present_subset(self, records):
+        """
+        The prediction the mechanism makes. Pooled lift is zero; restricted to
+        cases where the presence signal cannot dominate, it should not be.
+        """
+        m = self._module().mechanism(records)
+        lifts = m["lift_within_present_subset"]
+        assert max(lifts.values()) > 1.5, (
+            "if ranking is absent here too, the mechanism is wrong")
+
+    def test_a_trained_calibrator_recovers_ranking(self, records):
+        """
+        The fix, and the distinction that matters: information badly expressed
+        is an engineering problem, information absent is a ceiling.
+        """
+        f = self._module().try_to_fix(records)
+        assert f["raw_confidence_lift"] < 1.5
+        assert f["trained_lift"] > 2.0
+        assert f["recovered_ranking"]
+
+    def test_base_rates_are_computed_per_fold(self):
+        """
+        REGRESSION. Clause base rates were first computed over the whole
+        dataset, leaking held-out labels through a feature. A calibrator that
+        peeks recovers ranking trivially and establishes nothing.
+        """
+        src = (ROOT / "scripts" / "analyse_mechanism.py").read_text()
+        assert "TRAINING fold only" in src
+        i_loop = src.index("for f in range(folds):")
+        i_rate = src.index('counts = collections.Counter(r["clause"] for r in train)')
+        assert i_rate > i_loop, "base rates must be computed inside the fold loop"

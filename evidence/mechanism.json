@@ -1,0 +1,71 @@
+{
+  "n_records": 820,
+  "n_errors": 38,
+  "mechanism": {
+    "clause_types_with_errors": 13,
+    "clause_types_total": 41,
+    "top5_share_of_errors": 0.6578947368421053,
+    "worst_clauses": [
+      {
+        "clause": "Effective Date",
+        "errors": 9,
+        "asked": 20,
+        "rate": 0.45
+      },
+      {
+        "clause": "Parties",
+        "errors": 6,
+        "asked": 20,
+        "rate": 0.3
+      },
+      {
+        "clause": "Expiration Date",
+        "errors": 4,
+        "asked": 20,
+        "rate": 0.2
+      },
+      {
+        "clause": "Insurance",
+        "errors": 3,
+        "asked": 20,
+        "rate": 0.15
+      },
+      {
+        "clause": "License Grant",
+        "errors": 3,
+        "asked": 20,
+        "rate": 0.15
+      },
+      {
+        "clause": "Exclusivity",
+        "errors": 2,
+        "asked": 20,
+        "rate": 0.1
+      }
+    ],
+    "error_rate_when_clause_present": 0.21794871794871795,
+    "error_rate_when_clause_absent": 0.02830188679245283,
+    "n_present": 78,
+    "n_absent": 742,
+    "lift_within_present_subset": {
+      "conf_null_margin": 3.5086505190311414,
+      "conf_span_prob": 1.889273356401384,
+      "conf_start_end": 2.4290657439446366
+    },
+    "interpretation": "Confidence appears to encode whether a clause is PRESENT, which the model judges well, rather than whether the extracted span is RIGHT, which it judges badly. Since most questions have nothing to find, accuracy is carried by correct declining, and the errors concentrate where the model has found something and is therefore uniformly confident."
+  },
+  "fix_attempt": {
+    "folds": 5,
+    "trained_lift": 7.209851842906787,
+    "raw_confidence_lift": 0.0,
+    "recovered_ranking": true,
+    "fold_lifts": [
+      10.04081632653061,
+      6.5600000000000005,
+      10.04081632653061,
+      4.555555555555555,
+      4.85207100591716
+    ],
+    "verdict": "A trained combination recovers ranking: the information was present and badly expressed, which is an engineering problem."
+  }
+}
