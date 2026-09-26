@@ -111,16 +111,83 @@ def score_prediction(pred_text: str, pred_score: float, gold_texts: list[str],
     return any(overlaps(pred_text, g) for g in gold_texts)
 
 
+class Extractor:
+    """
+    Extractive QA run directly, without the pipeline helper.
+
+    The `question-answering` pipeline was removed from recent transformers, so
+    the forward pass is done here. That turns out to be the better choice
+    regardless: the null score — the model's own estimate that the clause is
+    absent — is the signal this whole project is about, and running the model
+    directly makes it explicit rather than leaving it to a helper's internal
+    thresholding.
+
+    Confidence is the softmax margin between the best answer span and the null
+    span. It is a probability over that two-way choice, which is exactly the
+    quantity a review-triage decision needs.
+    """
+
+    def __init__(self, model_name: str):
+        import torch
+        from transformers import AutoModelForQuestionAnswering, AutoTokenizer
+
+        self.torch = torch
+        self.tok = AutoTokenizer.from_pretrained(model_name)
+        self.model = AutoModelForQuestionAnswering.from_pretrained(model_name)
+        self.model.eval()
+
+    def __call__(self, question: str, context: str, max_len: int = 384,
+                 max_answer_tokens: int = 60) -> tuple[str, float]:
+        torch = self.torch
+        enc = self.tok(question, context, truncation="only_second",
+                       max_length=max_len, return_tensors="pt",
+                       return_offsets_mapping=True)
+        offsets = enc.pop("offset_mapping")[0]
+        seq_ids = enc.sequence_ids(0)
+
+        with torch.no_grad():
+            out = self.model(**enc)
+        start, end = out.start_logits[0], out.end_logits[0]
+
+        # Only spans inside the context are admissible answers; position 0 is
+        # the CLS token and carries the null score.
+        valid = [i for i, sid in enumerate(seq_ids) if sid == 1]
+        if not valid:
+            return "", 0.0
+
+        null = (start[0] + end[0]).item()
+
+        best, best_span = float("-inf"), None
+        for i in valid:
+            for j in valid:
+                if j < i or j - i + 1 > max_answer_tokens:
+                    continue
+                score = (start[i] + end[j]).item()
+                if score > best:
+                    best, best_span = score, (i, j)
+
+        if best_span is None:
+            return "", 0.0
+
+        # Two-way softmax between answering and declining.
+        m = max(best, null)
+        p_answer = pow(2.718281828, best - m)
+        p_null = pow(2.718281828, null - m)
+        conf = p_answer / (p_answer + p_null)
+
+        i, j = best_span
+        text = context[int(offsets[i][0]):int(offsets[j][1])]
+        return text, float(conf)
+
+
 def run(model_name: str, limit_contracts: int, budget_s: float,
         out_path: Path, cache: Path, min_conf: float,
         max_chars: int = 4000) -> dict:
-    from transformers import pipeline
-
     docs = fetch_corpus(cache)
     print(f"corpus: {len(docs)} contracts", flush=True)
 
     print(f"loading {model_name} (CPU) ...", flush=True)
-    qa = pipeline("question-answering", model=model_name, device=-1)
+    qa = Extractor(model_name)
 
     started = time.time()
     records: list[dict] = []
@@ -154,14 +221,11 @@ def run(model_name: str, limit_contracts: int, budget_s: float,
                 gold = [a["text"] for a in qa_item.get("answers", [])
                         if a["text"] in context]
                 try:
-                    res = qa(question=qa_item["question"], context=context,
-                             handle_impossible_answer=True, max_answer_len=200,
-                             max_seq_len=384, doc_stride=128)
+                    text, conf = qa(qa_item["question"], context)
                 except Exception as exc:          # noqa: BLE001
-                    print(f"  skipped {clause}: {type(exc).__name__}", flush=True)
+                    print(f"  skipped {clause}: {type(exc).__name__}: {exc}",
+                          flush=True)
                     continue
-
-                text, conf = res.get("answer", ""), float(res.get("score", 0.0))
                 records.append({
                     "contract": doc.get("title", f"doc-{contracts_done}"),
                     "clause": clause,
