@@ -1,0 +1,286 @@
+{
+  "n_records": 7905,
+  "n_errors": 2019,
+  "mechanism": {
+    "clause_types_with_errors": 1080,
+    "clause_types_total": 2635,
+    "top5_share_of_errors": 0.007429420505200594,
+    "worst_clauses": [
+      {
+        "clause": "5ad3a266604f3c001a3fea2a",
+        "errors": 3,
+        "asked": 3,
+        "rate": 1.0
+      },
+      {
+        "clause": "56dde0ba66d3e219004dad76",
+        "errors": 3,
+        "asked": 3,
+        "rate": 1.0
+      },
+      {
+        "clause": "5ad3ad61604f3c001a3fec10",
+        "errors": 3,
+        "asked": 3,
+        "rate": 1.0
+      },
+      {
+        "clause": "56dde1d966d3e219004dad8d",
+        "errors": 3,
+        "asked": 3,
+        "rate": 1.0
+      },
+      {
+        "clause": "56dde27d9a695914005b9651",
+        "errors": 3,
+        "asked": 3,
+        "rate": 1.0
+      },
+      {
+        "clause": "5ad3c626604f3c001a3ff012",
+        "errors": 3,
+        "asked": 3,
+        "rate": 1.0
+      }
+    ],
+    "error_rate_when_clause_present": 0.17804154302670624,
+    "error_rate_when_clause_absent": 0.33644133644133645,
+    "n_present": 4044,
+    "n_absent": 3861,
+    "lift_within_present_subset": {
+      "conf_null_margin": 3.135972222222222,
+      "conf_span_prob": 2.5977083333333333,
+      "conf_start_end": 2.808333333333333
+    },
+    "interpretation": "Confidence appears to encode whether a clause is PRESENT, which the model judges well, rather than whether the extracted span is RIGHT, which it judges badly. Since most questions have nothing to find, accuracy is carried by correct declining, and the errors concentrate where the model has found something and is therefore uniformly confident."
+  },
+  "fix_attempt": {
+    "folds": 5,
+    "trained_lift": 2.677990140913901,
+    "raw_confidence_lift": 0.248725121577776,
+    "recovered_ranking": true,
+    "fold_lifts": [
+      2.631102071005917,
+      2.890470914127424,
+      2.4398148148148144,
+      2.5205710886377157,
+      2.9079918159836318
+    ],
+    "verdict": "A trained combination recovers ranking: the information was present and badly expressed, which is an engineering problem."
+  },
+  "per_model": {
+    "deepset/bert-base-cased-squad2": {
+      "n": 2635,
+      "errors": 814,
+      "mechanism": {
+        "clause_types_with_errors": 814,
+        "clause_types_total": 2635,
+        "top5_share_of_errors": 0.006142506142506142,
+        "worst_clauses": [
+          {
+            "clause": "5ad39d53604f3c001a3fe8d2",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          },
+          {
+            "clause": "56dddf4066d3e219004dad61",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          },
+          {
+            "clause": "5ad3a266604f3c001a3fea27",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          },
+          {
+            "clause": "5ad3a266604f3c001a3fea2a",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          },
+          {
+            "clause": "56dde0379a695914005b9636",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          },
+          {
+            "clause": "5ad3ab70604f3c001a3feb89",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          }
+        ],
+        "error_rate_when_clause_present": 0.22774480712166173,
+        "error_rate_when_clause_absent": 0.3939393939393939,
+        "n_present": 1348,
+        "n_absent": 1287,
+        "lift_within_present_subset": {
+          "conf_null_margin": 2.7174824136065103,
+          "conf_span_prob": 2.302708782056043,
+          "conf_start_end": 2.4028265551889145
+        },
+        "interpretation": "Confidence appears to encode whether a clause is PRESENT, which the model judges well, rather than whether the extracted span is RIGHT, which it judges badly. Since most questions have nothing to find, accuracy is carried by correct declining, and the errors concentrate where the model has found something and is therefore uniformly confident."
+      },
+      "fix_attempt": {
+        "folds": 5,
+        "trained_lift": 1.198898352137924,
+        "raw_confidence_lift": 0.4084302384506696,
+        "recovered_ranking": false,
+        "fold_lifts": [
+          1.2437873108427044,
+          1.0941176470588236,
+          1.1227180899908171,
+          1.261610648281145,
+          1.272258064516129
+        ],
+        "verdict": "A trained combination on every available signal still cannot rank errors. The information is not merely badly expressed \u2014 on these features it is absent, and no post-hoc calibration recovers it."
+      }
+    },
+    "deepset/electra-base-squad2": {
+      "n": 2635,
+      "errors": 592,
+      "mechanism": {
+        "clause_types_with_errors": 592,
+        "clause_types_total": 2635,
+        "top5_share_of_errors": 0.008445945945945946,
+        "worst_clauses": [
+          {
+            "clause": "56ddde6b9a695914005b962b",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          },
+          {
+            "clause": "5ad3a266604f3c001a3fea2a",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          },
+          {
+            "clause": "56dde0379a695914005b9636",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          },
+          {
+            "clause": "56dde0ba66d3e219004dad76",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          },
+          {
+            "clause": "56dde0ba66d3e219004dad77",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          },
+          {
+            "clause": "5ad3ad61604f3c001a3fec10",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          }
+        ],
+        "error_rate_when_clause_present": 0.17804154302670624,
+        "error_rate_when_clause_absent": 0.27350427350427353,
+        "n_present": 1348,
+        "n_absent": 1287,
+        "lift_within_present_subset": {
+          "conf_null_margin": 3.3699999999999997,
+          "conf_span_prob": 2.9955555555555553,
+          "conf_start_end": 3.2529861111111114
+        },
+        "interpretation": "Confidence appears to encode whether a clause is PRESENT, which the model judges well, rather than whether the extracted span is RIGHT, which it judges badly. Since most questions have nothing to find, accuracy is carried by correct declining, and the errors concentrate where the model has found something and is therefore uniformly confident."
+      },
+      "fix_attempt": {
+        "folds": 5,
+        "trained_lift": 1.238808219261696,
+        "raw_confidence_lift": 0.23162712952400896,
+        "recovered_ranking": false,
+        "fold_lifts": [
+          1.4704241071428572,
+          1.0730675855587752,
+          1.1749405469678953,
+          1.214208,
+          1.2614008566389519
+        ],
+        "verdict": "A trained combination on every available signal still cannot rank errors. The information is not merely badly expressed \u2014 on these features it is absent, and no post-hoc calibration recovers it."
+      }
+    },
+    "deepset/roberta-base-squad2": {
+      "n": 2635,
+      "errors": 613,
+      "mechanism": {
+        "clause_types_with_errors": 613,
+        "clause_types_total": 2635,
+        "top5_share_of_errors": 0.008156606851549755,
+        "worst_clauses": [
+          {
+            "clause": "56dddf4066d3e219004dad61",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          },
+          {
+            "clause": "5ad3a266604f3c001a3fea2a",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          },
+          {
+            "clause": "56dde0ba66d3e219004dad76",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          },
+          {
+            "clause": "5ad3ad61604f3c001a3fec0d",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          },
+          {
+            "clause": "5ad3ad61604f3c001a3fec10",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          },
+          {
+            "clause": "56dde1d966d3e219004dad8d",
+            "errors": 1,
+            "asked": 1,
+            "rate": 1.0
+          }
+        ],
+        "error_rate_when_clause_present": 0.12833827893175073,
+        "error_rate_when_clause_absent": 0.3418803418803419,
+        "n_present": 1348,
+        "n_absent": 1287,
+        "lift_within_present_subset": {
+          "conf_null_margin": 3.603194226335661,
+          "conf_span_prob": 3.287914731531291,
+          "conf_start_end": 3.603194226335661
+        },
+        "interpretation": "Confidence appears to encode whether a clause is PRESENT, which the model judges well, rather than whether the extracted span is RIGHT, which it judges badly. Since most questions have nothing to find, accuracy is carried by correct declining, and the errors concentrate where the model has found something and is therefore uniformly confident."
+      },
+      "fix_attempt": {
+        "folds": 5,
+        "trained_lift": 1.0948935444295533,
+        "raw_confidence_lift": 0.12032866296508453,
+        "recovered_ranking": false,
+        "fold_lifts": [
+          0.949252094917378,
+          1.1759772237611574,
+          1.1995967741935485,
+          1.0748208146378417,
+          1.0748208146378417
+        ],
+        "verdict": "A trained combination on every available signal still cannot rank errors. The information is not merely badly expressed \u2014 on these features it is absent, and no post-hoc calibration recovers it."
+      }
+    }
+  }
+}
