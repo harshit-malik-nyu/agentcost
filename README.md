@@ -72,65 +72,71 @@ ranking is:
 Lift is standard in credit and fraud scoring. It is essentially absent from how
 document-extraction agents are sold, which is on accuracy alone.
 
-### Measured on a real model: the confidence is worse than useless
+### Measured: the confidence cannot rank errors, and it is not the estimator's fault
 
 Everything above about calibration was a mechanism. Here is a measurement.
 
-**RoBERTa fine-tuned on CUAD** (`akdeniz27/roberta-base-cuad`), run over 492
-questions from 12 real contracts. Confidence is the softmax margin between the
-best answer span and the null span — the natural signal for this architecture,
-and the one a practitioner would use.
+Two independently fine-tuned CUAD checkpoints, 410 questions each from real
+contracts, **three different confidence estimators computed per answer**:
 
-| | |
-|---|---:|
-| Accuracy | 96.7% |
-| Majority-class baseline | 90.2% |
-| Errors | 16 of 492 |
-| **Lift over random ranking** | **0.00×** |
+| Estimator | What it measures | Distinct values | Lift |
+|---|---|---:|---:|
+| `null_margin` | softmax between best span and the null span — the practitioner default | 15 | **0.00** |
+| `span_prob` | softmax over all admissible spans | **187** | **0.00** |
+| `start_end` | geometric mean of independent start and end token probabilities | **222** | **0.00** |
 
-The lift is zero, and the reason is worse than a null result:
+**Zero lift in all six model-estimator combinations.**
 
-| Review the least-confident… | Errors caught |
-|---|---:|
-| 5% | **0 of 16** |
-| 10% | **0 of 16** |
-| 25% | **0 of 16** |
-| 50% | 1 of 16 |
+The three estimators were computed precisely to separate two questions that the
+first measurement conflated: is the *model* uncalibrated, or is the *estimator*?
+Null-margin softmax saturates by construction on a model trained with a null
+class, so a finding based on it alone is partly a claim about my own choice of
+signal.
 
-**The model's errors are concentrated at the top of its confidence ranking, not
-the bottom.** Sorting by confidence to decide what to review is not merely
-uninformative here — it is anti-correlated with error.
+The answer is unambiguous. `span_prob` and `start_end` are **not degenerate** —
+187 and 222 distinct values across 410 answers — and they rank errors no better
+than the saturated one. Reviewing the least-confident quarter catches **0–4%**
+of errors under every signal.
 
-The confidence distribution shows why. It is degenerate: 444 of 492 answers sit
-at essentially 0.0 and 43 at essentially 1.0, with five values in between. The
-model is almost never uncertain. And its mistakes look like this:
+| Model | Questions | Accuracy | Errors | Lift (all three estimators) |
+|---|---:|---:|---:|---:|
+| `akdeniz27/roberta-base-cuad` | 410 | 96.6% | 14 | 0.00 |
+| `Rakib/roberta-base-on-cuad` | 410 | 94.1% | 24 | 0.00 |
+
+And the errors are the kind that matter — high-confidence fabrications:
 
 | Confidence | Clause present? | Predicted |
 |---:|---|---|
 | 1.0000 | no | `6th day of April, 1999` |
 | 1.0000 | yes | `OCTOBER 15, 2009` |
-| 1.0000 | yes | `NFLA-NC` |
 | 0.9999 | no | `, 2013,` |
 
-Fabricating a date with perfect confidence, and emitting `, 2013,` as a clause
-with confidence 0.9999.
-
-**What this means for the economics.** This agent is the "blind" row of the
-table above. It cannot triage its own work, so the review rate that hits any
-error tolerance is close to 100%, and the saving collapses from the 96% a
+**What this means for the economics.** These agents are the "blind" row of the
+table above. They cannot triage their own work, so the review rate to hit any
+error tolerance is near 100%, and the saving collapses from the 96% a
 calibrated agent would deliver to the 73% available from verification speed
 alone.
 
-**What it does not establish.** One model, 492 questions, 16 errors — a small
-sample. Contexts were truncated to 4,000 characters, which raises the
-majority-class baseline to 90.2% and makes the task easier than the full
-document. A different confidence estimator — span probability rather than the
-null margin, or an ensemble — might rank errors better, and this measures the
-natural signal rather than the best possible one.
+#### Scope, stated narrowly
 
-What it does establish is that **useful calibration cannot be assumed.** The
-first real model tested has none, and an automation business case built on
-selective review would have been wrong about its central input.
+A third checkpoint, `marshmellow77/roberta-base-cuad`, returned byte-identical
+results to `akdeniz27` — same accuracy, same error count, same distinct-value
+counts. It is the same weights mirrored, so this is **two distinct models, not
+three**, and the run says so rather than counting it as independent evidence.
+
+Other limits: 38 errors across 820 questions is a small sample, and the lift
+estimate carries a wide interval — though zero of fourteen and one of
+twenty-four in the bottom quartile is not an ambiguous direction. Contexts were
+truncated to 4,000 characters, which raises the majority-class baseline to
+about 90% and makes the task easier than a full contract. Both models share an
+architecture and a fine-tuning recipe, so this is evidence about extractive QA
+fine-tuning rather than about language models generally. A trained calibrator
+or an ensemble was not tried and might recover ranking.
+
+What it does establish is that **useful calibration cannot be assumed.** Every
+real model tested has none, under every signal tried — and an automation
+business case built on selective review would have been wrong about its central
+input.
 
 ### And a threshold read off that curve is not safe to deploy
 
