@@ -1,0 +1,72 @@
+name: probe-model
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/probe-model.yml']
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - name: Can we reach and load a CUAD-finetuned extractor?
+        run: |
+          {
+            echo "# model availability probe"
+            echo "run_at=$(date -u +%FT%TZ)"
+            echo
+            for m in "akdeniz27/roberta-base-cuad" "Rakib/roberta-base-on-cuad" \
+                     "marshmellow77/roberta-base-cuad" "akdeniz27/deberta-v2-xlarge-cuad"; do
+              code=$(curl -sL -o /tmp/m -w "%{http_code}" --max-time 30 \
+                "https://huggingface.co/api/models/$m")
+              size=$(python3 -c "
+import json
+try:
+    d=json.load(open('/tmp/m'))
+    fs=[f['rfilename'] for f in d.get('siblings',[])]
+    print('files:', len([f for f in fs if f.endswith(('.bin','.safetensors'))]),
+          '| downloads:', d.get('downloads','?'))
+except Exception as e: print('unparsed')
+" 2>/dev/null)
+              echo "HTTP=$code  $m  $size"
+            done
+            echo
+            echo "--- install cost ---"
+            pip install --quiet 'transformers>=4.40' 'torch --index-url https://download.pytorch.org/whl/cpu' 2>&1 | tail -3 || \
+            pip install --quiet transformers torch 2>&1 | tail -3
+            python3 - <<'PY'
+import time, sys
+t=time.time()
+try:
+    import torch, transformers
+    print(f"torch {torch.__version__}, transformers {transformers.__version__}")
+    from transformers import pipeline
+    qa = pipeline("question-answering", model="akdeniz27/roberta-base-cuad",
+                  device=-1)
+    ctx = ("This Agreement is entered into as of January 1, 2020 by and between "
+           "Acme Corporation and Beta Industries. The term of this Agreement "
+           "shall be three years. Either party may terminate upon 30 days notice.")
+    for q in ["Highlight the parts related to the date of the agreement.",
+              "Highlight the parts related to the parties to the agreement.",
+              "Highlight the parts related to a source code escrow."]:
+        r = qa(question=q, context=ctx, handle_impossible_answer=True, top_k=1)
+        print(f"  score={r['score']:.4f}  answer={r['answer'][:50]!r}")
+    print(f"total {time.time()-t:.0f}s")
+except Exception as e:
+    print("FAILED:", type(e).__name__, e)
+    sys.exit(0)
+PY
+          } > MODEL_PROBE.txt 2>&1
+          cat MODEL_PROBE.txt
+      - name: Commit
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add MODEL_PROBE.txt && git commit -m "probe: model availability" || exit 0
+          git pull --rebase --autostash origin main || true
+          git push
