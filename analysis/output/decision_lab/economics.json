@@ -1,0 +1,2599 @@
+{
+  "base_case": {
+    "cost_factor": 1.0,
+    "options": [
+      {
+        "capacity_gate_pass": false,
+        "cash_outlay_usd": 0.0,
+        "components": [
+          {
+            "activity": "Clause review",
+            "cash_outlay_usd": 0.0,
+            "economic_cost_usd": 240000.0,
+            "quantity": 2666.6666666666665,
+            "unit": "reviewer_hour"
+          }
+        ],
+        "economic_cost_usd": 260000.0,
+        "expected_incidents": 40.0,
+        "feasible": false,
+        "option": "Review every clause",
+        "reviewer_hours": 2666.667,
+        "risk_gate_pass": true,
+        "scenario_loss_usd": 20000.0,
+        "volume": 20000.0
+      },
+      {
+        "capacity_gate_pass": true,
+        "cash_outlay_usd": 19600.0,
+        "components": [
+          {
+            "activity": "Exception review: 35% at 9 minutes",
+            "cash_outlay_usd": 0.0,
+            "economic_cost_usd": 94500.0,
+            "quantity": 1050.0,
+            "unit": "reviewer_hour"
+          },
+          {
+            "activity": "QA: 10% at 3 minutes",
+            "cash_outlay_usd": 0.0,
+            "economic_cost_usd": 9000.000000000002,
+            "quantity": 100.00000000000001,
+            "unit": "reviewer_hour"
+          },
+          {
+            "activity": "Inference",
+            "cash_outlay_usd": 1600.0,
+            "economic_cost_usd": 1600.0,
+            "quantity": 20000.0,
+            "unit": "clause"
+          }
+        ],
+        "economic_cost_usd": 163100.0,
+        "expected_incidents": 80.0,
+        "feasible": true,
+        "option": "Calibrated triage with exception review",
+        "reviewer_hours": 1150.0,
+        "risk_gate_pass": true,
+        "scenario_loss_usd": 40000.0,
+        "volume": 20000.0
+      },
+      {
+        "capacity_gate_pass": true,
+        "cash_outlay_usd": 10600.0,
+        "components": [
+          {
+            "activity": "Exceptions: 10% at 8 minutes",
+            "cash_outlay_usd": 0.0,
+            "economic_cost_usd": 24000.0,
+            "quantity": 266.6666666666667,
+            "unit": "reviewer_hour"
+          },
+          {
+            "activity": "Inference",
+            "cash_outlay_usd": 1600.0,
+            "economic_cost_usd": 1600.0,
+            "quantity": 20000.0,
+            "unit": "clause"
+          }
+        ],
+        "economic_cost_usd": 214600.0,
+        "expected_incidents": 360.0,
+        "feasible": false,
+        "option": "Aggressive auto-acceptance",
+        "reviewer_hours": 266.667,
+        "risk_gate_pass": false,
+        "scenario_loss_usd": 180000.0,
+        "volume": 20000.0
+      }
+    ],
+    "recommended_if_assumptions_hold": "Calibrated triage with exception review",
+    "risk_factor": 1.0,
+    "volume_factor": 1.0
+  },
+  "break_even": [
+    {
+      "additional_fixed_usd": 18000,
+      "minimum_integer_volume_to_break_even": 3134,
+      "option": "Calibrated triage with exception review",
+      "qualification": "Positive unit advantage required; risk and capacity gates still apply.",
+      "relative_to": "Review every clause",
+      "unit_economic_advantage_usd": 5.745
+    },
+    {
+      "additional_fixed_usd": 9000,
+      "minimum_integer_volume_to_break_even": 3309,
+      "option": "Aggressive auto-acceptance",
+      "qualification": "Positive unit advantage required; risk and capacity gates still apply.",
+      "relative_to": "Review every clause",
+      "unit_economic_advantage_usd": 2.72
+    }
+  ],
+  "evidence_status": "ILLUSTRATIVE PLANNING ASSUMPTIONS; NOT OBSERVED ROI",
+  "scenarios": [
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 90000.0,
+              "quantity": 1333.3333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 100000.0,
+          "expected_incidents": 20.0,
+          "feasible": true,
+          "option": "Review every clause",
+          "reviewer_hours": 1333.333,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 10000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 18600.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 35437.5,
+              "quantity": 525.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 3375.000000000001,
+              "quantity": 50.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 600.0,
+              "economic_cost_usd": 600.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 77412.5,
+          "expected_incidents": 40.0,
+          "feasible": true,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 575.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 20000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 9600.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 9000.0,
+              "quantity": 133.33333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 600.0,
+              "economic_cost_usd": 600.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 108600.0,
+          "expected_incidents": 180.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 133.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 90000.0,
+          "volume": 10000.0
+        }
+      ],
+      "recommended_if_assumptions_hold": "Calibrated triage with exception review",
+      "risk_factor": 1,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 90000.0,
+              "quantity": 1333.3333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 110000.0,
+          "expected_incidents": 40.0,
+          "feasible": true,
+          "option": "Review every clause",
+          "reviewer_hours": 1333.333,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 20000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 18600.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 35437.5,
+              "quantity": 525.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 3375.000000000001,
+              "quantity": 50.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 600.0,
+              "economic_cost_usd": 600.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 97412.5,
+          "expected_incidents": 80.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 575.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 40000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 9600.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 9000.0,
+              "quantity": 133.33333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 600.0,
+              "economic_cost_usd": 600.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 198600.0,
+          "expected_incidents": 360.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 133.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 180000.0,
+          "volume": 10000.0
+        }
+      ],
+      "recommended_if_assumptions_hold": "Review every clause",
+      "risk_factor": 2,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 90000.0,
+              "quantity": 1333.3333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 130000.0,
+          "expected_incidents": 80.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 1333.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 40000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 18600.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 35437.5,
+              "quantity": 525.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 3375.000000000001,
+              "quantity": 50.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 600.0,
+              "economic_cost_usd": 600.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 137412.5,
+          "expected_incidents": 160.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 575.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 80000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 9600.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 9000.0,
+              "quantity": 133.33333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 600.0,
+              "economic_cost_usd": 600.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 378600.0,
+          "expected_incidents": 720.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 133.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 360000.0,
+          "volume": 10000.0
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 120000.0,
+              "quantity": 1333.3333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 130000.0,
+          "expected_incidents": 20.0,
+          "feasible": true,
+          "option": "Review every clause",
+          "reviewer_hours": 1333.333,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 10000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 18800.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 47250.0,
+              "quantity": 525.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 4500.000000000001,
+              "quantity": 50.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 800.0,
+              "economic_cost_usd": 800.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 90550.0,
+          "expected_incidents": 40.0,
+          "feasible": true,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 575.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 20000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 9800.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 12000.0,
+              "quantity": 133.33333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 800.0,
+              "economic_cost_usd": 800.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 111800.0,
+          "expected_incidents": 180.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 133.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 90000.0,
+          "volume": 10000.0
+        }
+      ],
+      "recommended_if_assumptions_hold": "Calibrated triage with exception review",
+      "risk_factor": 1,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 120000.0,
+              "quantity": 1333.3333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 140000.0,
+          "expected_incidents": 40.0,
+          "feasible": true,
+          "option": "Review every clause",
+          "reviewer_hours": 1333.333,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 20000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 18800.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 47250.0,
+              "quantity": 525.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 4500.000000000001,
+              "quantity": 50.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 800.0,
+              "economic_cost_usd": 800.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 110550.0,
+          "expected_incidents": 80.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 575.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 40000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 9800.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 12000.0,
+              "quantity": 133.33333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 800.0,
+              "economic_cost_usd": 800.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 201800.0,
+          "expected_incidents": 360.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 133.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 180000.0,
+          "volume": 10000.0
+        }
+      ],
+      "recommended_if_assumptions_hold": "Review every clause",
+      "risk_factor": 2,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 120000.0,
+              "quantity": 1333.3333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 160000.0,
+          "expected_incidents": 80.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 1333.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 40000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 18800.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 47250.0,
+              "quantity": 525.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 4500.000000000001,
+              "quantity": 50.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 800.0,
+              "economic_cost_usd": 800.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 150550.0,
+          "expected_incidents": 160.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 575.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 80000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 9800.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 12000.0,
+              "quantity": 133.33333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 800.0,
+              "economic_cost_usd": 800.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 381800.0,
+          "expected_incidents": 720.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 133.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 360000.0,
+          "volume": 10000.0
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 180000.0,
+              "quantity": 1333.3333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 190000.0,
+          "expected_incidents": 20.0,
+          "feasible": true,
+          "option": "Review every clause",
+          "reviewer_hours": 1333.333,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 10000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 19200.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 70875.0,
+              "quantity": 525.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 6750.000000000002,
+              "quantity": 50.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1200.0,
+              "economic_cost_usd": 1200.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 116825.0,
+          "expected_incidents": 40.0,
+          "feasible": true,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 575.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 20000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10200.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 18000.0,
+              "quantity": 133.33333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1200.0,
+              "economic_cost_usd": 1200.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 118200.0,
+          "expected_incidents": 180.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 133.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 90000.0,
+          "volume": 10000.0
+        }
+      ],
+      "recommended_if_assumptions_hold": "Calibrated triage with exception review",
+      "risk_factor": 1,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 180000.0,
+              "quantity": 1333.3333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 200000.0,
+          "expected_incidents": 40.0,
+          "feasible": true,
+          "option": "Review every clause",
+          "reviewer_hours": 1333.333,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 20000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 19200.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 70875.0,
+              "quantity": 525.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 6750.000000000002,
+              "quantity": 50.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1200.0,
+              "economic_cost_usd": 1200.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 136825.0,
+          "expected_incidents": 80.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 575.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 40000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10200.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 18000.0,
+              "quantity": 133.33333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1200.0,
+              "economic_cost_usd": 1200.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 208200.0,
+          "expected_incidents": 360.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 133.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 180000.0,
+          "volume": 10000.0
+        }
+      ],
+      "recommended_if_assumptions_hold": "Review every clause",
+      "risk_factor": 2,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 180000.0,
+              "quantity": 1333.3333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 220000.0,
+          "expected_incidents": 80.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 1333.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 40000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 19200.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 70875.0,
+              "quantity": 525.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 6750.000000000002,
+              "quantity": 50.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1200.0,
+              "economic_cost_usd": 1200.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 176825.0,
+          "expected_incidents": 160.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 575.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 80000.0,
+          "volume": 10000.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10200.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 18000.0,
+              "quantity": 133.33333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1200.0,
+              "economic_cost_usd": 1200.0,
+              "quantity": 10000.0,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 388200.0,
+          "expected_incidents": 720.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 133.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 360000.0,
+          "volume": 10000.0
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 180000.0,
+              "quantity": 2666.6666666666665,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 200000.0,
+          "expected_incidents": 40.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 2666.667,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 20000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 19200.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 70875.0,
+              "quantity": 1050.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 6750.000000000002,
+              "quantity": 100.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1200.0,
+              "economic_cost_usd": 1200.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 136825.0,
+          "expected_incidents": 80.0,
+          "feasible": true,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 1150.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 40000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10200.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 18000.0,
+              "quantity": 266.6666666666667,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1200.0,
+              "economic_cost_usd": 1200.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 208200.0,
+          "expected_incidents": 360.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 266.667,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 180000.0,
+          "volume": 20000
+        }
+      ],
+      "recommended_if_assumptions_hold": "Calibrated triage with exception review",
+      "risk_factor": 1,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 180000.0,
+              "quantity": 2666.6666666666665,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 220000.0,
+          "expected_incidents": 80.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 2666.667,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 40000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 19200.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 70875.0,
+              "quantity": 1050.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 6750.000000000002,
+              "quantity": 100.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1200.0,
+              "economic_cost_usd": 1200.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 176825.0,
+          "expected_incidents": 160.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 1150.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 80000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10200.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 18000.0,
+              "quantity": 266.6666666666667,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1200.0,
+              "economic_cost_usd": 1200.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 388200.0,
+          "expected_incidents": 720.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 266.667,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 360000.0,
+          "volume": 20000
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 2,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 180000.0,
+              "quantity": 2666.6666666666665,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 260000.0,
+          "expected_incidents": 160.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 2666.667,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 80000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 19200.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 70875.0,
+              "quantity": 1050.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 6750.000000000002,
+              "quantity": 100.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1200.0,
+              "economic_cost_usd": 1200.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 256825.0,
+          "expected_incidents": 320.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 1150.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 160000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10200.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 18000.0,
+              "quantity": 266.6666666666667,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1200.0,
+              "economic_cost_usd": 1200.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 748200.0,
+          "expected_incidents": 1440.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 266.667,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 720000.0,
+          "volume": 20000
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 240000.0,
+              "quantity": 2666.6666666666665,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 260000.0,
+          "expected_incidents": 40.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 2666.667,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 20000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 19600.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 94500.0,
+              "quantity": 1050.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 9000.000000000002,
+              "quantity": 100.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1600.0,
+              "economic_cost_usd": 1600.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 163100.0,
+          "expected_incidents": 80.0,
+          "feasible": true,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 1150.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 40000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10600.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 24000.0,
+              "quantity": 266.6666666666667,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1600.0,
+              "economic_cost_usd": 1600.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 214600.0,
+          "expected_incidents": 360.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 266.667,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 180000.0,
+          "volume": 20000
+        }
+      ],
+      "recommended_if_assumptions_hold": "Calibrated triage with exception review",
+      "risk_factor": 1,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 240000.0,
+              "quantity": 2666.6666666666665,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 280000.0,
+          "expected_incidents": 80.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 2666.667,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 40000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 19600.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 94500.0,
+              "quantity": 1050.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 9000.000000000002,
+              "quantity": 100.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1600.0,
+              "economic_cost_usd": 1600.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 203100.0,
+          "expected_incidents": 160.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 1150.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 80000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10600.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 24000.0,
+              "quantity": 266.6666666666667,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1600.0,
+              "economic_cost_usd": 1600.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 394600.0,
+          "expected_incidents": 720.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 266.667,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 360000.0,
+          "volume": 20000
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 2,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 240000.0,
+              "quantity": 2666.6666666666665,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 320000.0,
+          "expected_incidents": 160.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 2666.667,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 80000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 19600.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 94500.0,
+              "quantity": 1050.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 9000.000000000002,
+              "quantity": 100.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1600.0,
+              "economic_cost_usd": 1600.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 283100.0,
+          "expected_incidents": 320.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 1150.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 160000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10600.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 24000.0,
+              "quantity": 266.6666666666667,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 1600.0,
+              "economic_cost_usd": 1600.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 754600.0,
+          "expected_incidents": 1440.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 266.667,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 720000.0,
+          "volume": 20000
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 360000.0,
+              "quantity": 2666.6666666666665,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 380000.0,
+          "expected_incidents": 40.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 2666.667,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 20000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 20400.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 141750.0,
+              "quantity": 1050.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 13500.000000000004,
+              "quantity": 100.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 2400.0,
+              "economic_cost_usd": 2400.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 215650.0,
+          "expected_incidents": 80.0,
+          "feasible": true,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 1150.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 40000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 11400.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 36000.0,
+              "quantity": 266.6666666666667,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 2400.0,
+              "economic_cost_usd": 2400.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 227400.0,
+          "expected_incidents": 360.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 266.667,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 180000.0,
+          "volume": 20000
+        }
+      ],
+      "recommended_if_assumptions_hold": "Calibrated triage with exception review",
+      "risk_factor": 1,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 360000.0,
+              "quantity": 2666.6666666666665,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 400000.0,
+          "expected_incidents": 80.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 2666.667,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 40000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 20400.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 141750.0,
+              "quantity": 1050.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 13500.000000000004,
+              "quantity": 100.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 2400.0,
+              "economic_cost_usd": 2400.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 255650.0,
+          "expected_incidents": 160.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 1150.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 80000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 11400.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 36000.0,
+              "quantity": 266.6666666666667,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 2400.0,
+              "economic_cost_usd": 2400.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 407400.0,
+          "expected_incidents": 720.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 266.667,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 360000.0,
+          "volume": 20000
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 2,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 360000.0,
+              "quantity": 2666.6666666666665,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 440000.0,
+          "expected_incidents": 160.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 2666.667,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 80000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 20400.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 141750.0,
+              "quantity": 1050.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 13500.000000000004,
+              "quantity": 100.00000000000001,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 2400.0,
+              "economic_cost_usd": 2400.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 335650.0,
+          "expected_incidents": 320.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 1150.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 160000.0,
+          "volume": 20000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 11400.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 36000.0,
+              "quantity": 266.6666666666667,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 2400.0,
+              "economic_cost_usd": 2400.0,
+              "quantity": 20000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 767400.0,
+          "expected_incidents": 1440.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 266.667,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 720000.0,
+          "volume": 20000
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 360000.0,
+              "quantity": 5333.333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 400000.0,
+          "expected_incidents": 80.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 5333.333,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 40000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 20400.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 141750.0,
+              "quantity": 2100.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 13500.000000000004,
+              "quantity": 200.00000000000003,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 2400.0,
+              "economic_cost_usd": 2400.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 255650.0,
+          "expected_incidents": 160.0,
+          "feasible": true,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 2300.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 80000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 11400.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 36000.0,
+              "quantity": 533.3333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 2400.0,
+              "economic_cost_usd": 2400.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 407400.0,
+          "expected_incidents": 720.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 533.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 360000.0,
+          "volume": 40000
+        }
+      ],
+      "recommended_if_assumptions_hold": "Calibrated triage with exception review",
+      "risk_factor": 1,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 360000.0,
+              "quantity": 5333.333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 440000.0,
+          "expected_incidents": 160.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 5333.333,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 80000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 20400.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 141750.0,
+              "quantity": 2100.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 13500.000000000004,
+              "quantity": 200.00000000000003,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 2400.0,
+              "economic_cost_usd": 2400.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 335650.0,
+          "expected_incidents": 320.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 2300.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 160000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 11400.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 36000.0,
+              "quantity": 533.3333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 2400.0,
+              "economic_cost_usd": 2400.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 767400.0,
+          "expected_incidents": 1440.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 533.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 720000.0,
+          "volume": 40000
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 2,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 360000.0,
+              "quantity": 5333.333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 520000.0,
+          "expected_incidents": 320.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 5333.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 160000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 20400.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 141750.0,
+              "quantity": 2100.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 13500.000000000004,
+              "quantity": 200.00000000000003,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 2400.0,
+              "economic_cost_usd": 2400.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 495650.0,
+          "expected_incidents": 640.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 2300.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 320000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 11400.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 36000.0,
+              "quantity": 533.3333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 2400.0,
+              "economic_cost_usd": 2400.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 1487400.0,
+          "expected_incidents": 2880.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 533.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 1440000.0,
+          "volume": 40000
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 480000.0,
+              "quantity": 5333.333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 520000.0,
+          "expected_incidents": 80.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 5333.333,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 40000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 21200.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 189000.0,
+              "quantity": 2100.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 18000.000000000004,
+              "quantity": 200.00000000000003,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 3200.0,
+              "economic_cost_usd": 3200.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 308200.0,
+          "expected_incidents": 160.0,
+          "feasible": true,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 2300.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 80000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 12200.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 48000.0,
+              "quantity": 533.3333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 3200.0,
+              "economic_cost_usd": 3200.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 420200.0,
+          "expected_incidents": 720.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 533.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 360000.0,
+          "volume": 40000
+        }
+      ],
+      "recommended_if_assumptions_hold": "Calibrated triage with exception review",
+      "risk_factor": 1,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 480000.0,
+              "quantity": 5333.333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 560000.0,
+          "expected_incidents": 160.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 5333.333,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 80000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 21200.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 189000.0,
+              "quantity": 2100.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 18000.000000000004,
+              "quantity": 200.00000000000003,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 3200.0,
+              "economic_cost_usd": 3200.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 388200.0,
+          "expected_incidents": 320.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 2300.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 160000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 12200.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 48000.0,
+              "quantity": 533.3333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 3200.0,
+              "economic_cost_usd": 3200.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 780200.0,
+          "expected_incidents": 1440.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 533.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 720000.0,
+          "volume": 40000
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 2,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 480000.0,
+              "quantity": 5333.333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 640000.0,
+          "expected_incidents": 320.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 5333.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 160000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 21200.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 189000.0,
+              "quantity": 2100.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 18000.000000000004,
+              "quantity": 200.00000000000003,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 3200.0,
+              "economic_cost_usd": 3200.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 548200.0,
+          "expected_incidents": 640.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 2300.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 320000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 12200.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 48000.0,
+              "quantity": 533.3333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 3200.0,
+              "economic_cost_usd": 3200.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 1500200.0,
+          "expected_incidents": 2880.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 533.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 1440000.0,
+          "volume": 40000
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 720000.0,
+              "quantity": 5333.333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 760000.0,
+          "expected_incidents": 80.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 5333.333,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 40000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 22800.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 283500.0,
+              "quantity": 2100.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 27000.000000000007,
+              "quantity": 200.00000000000003,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 4800.0,
+              "economic_cost_usd": 4800.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 413300.0,
+          "expected_incidents": 160.0,
+          "feasible": true,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 2300.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 80000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 13800.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 72000.0,
+              "quantity": 533.3333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 4800.0,
+              "economic_cost_usd": 4800.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 445800.0,
+          "expected_incidents": 720.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 533.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 360000.0,
+          "volume": 40000
+        }
+      ],
+      "recommended_if_assumptions_hold": "Calibrated triage with exception review",
+      "risk_factor": 1,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 720000.0,
+              "quantity": 5333.333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 800000.0,
+          "expected_incidents": 160.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 5333.333,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 80000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 22800.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 283500.0,
+              "quantity": 2100.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 27000.000000000007,
+              "quantity": 200.00000000000003,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 4800.0,
+              "economic_cost_usd": 4800.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 493300.0,
+          "expected_incidents": 320.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 2300.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 160000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 13800.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 72000.0,
+              "quantity": 533.3333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 4800.0,
+              "economic_cost_usd": 4800.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 805800.0,
+          "expected_incidents": 1440.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 533.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 720000.0,
+          "volume": 40000
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 2,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": false,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Clause review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 720000.0,
+              "quantity": 5333.333333333333,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 880000.0,
+          "expected_incidents": 320.0,
+          "feasible": false,
+          "option": "Review every clause",
+          "reviewer_hours": 5333.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 160000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 22800.0,
+          "components": [
+            {
+              "activity": "Exception review: 35% at 9 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 283500.0,
+              "quantity": 2100.0,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "QA: 10% at 3 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 27000.000000000007,
+              "quantity": 200.00000000000003,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 4800.0,
+              "economic_cost_usd": 4800.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 653300.0,
+          "expected_incidents": 640.0,
+          "feasible": false,
+          "option": "Calibrated triage with exception review",
+          "reviewer_hours": 2300.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 320000.0,
+          "volume": 40000
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 13800.0,
+          "components": [
+            {
+              "activity": "Exceptions: 10% at 8 minutes",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 72000.0,
+              "quantity": 533.3333333333334,
+              "unit": "reviewer_hour"
+            },
+            {
+              "activity": "Inference",
+              "cash_outlay_usd": 4800.0,
+              "economic_cost_usd": 4800.0,
+              "quantity": 40000,
+              "unit": "clause"
+            }
+          ],
+          "economic_cost_usd": 1525800.0,
+          "expected_incidents": 2880.0,
+          "feasible": false,
+          "option": "Aggressive auto-acceptance",
+          "reviewer_hours": 533.333,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 1440000.0,
+          "volume": 40000
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 2
+    }
+  ]
+}

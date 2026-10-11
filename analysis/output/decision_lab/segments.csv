@@ -1,0 +1,5 @@
+segment,arm,assigned,activated,activation_itt,incidents,incident_itt
+complex_contract,control,640,251,0.3921875,4,0.00625
+complex_contract,treatment,640,199,0.3109375,20,0.03125
+routine_contract,control,640,308,0.48125,0,0.0
+routine_contract,treatment,640,378,0.590625,4,0.00625

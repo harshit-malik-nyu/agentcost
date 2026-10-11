@@ -1,0 +1,127 @@
+{
+  "project": "agentcost",
+  "title": "Buy automation only when review-adjusted cost and risk both improve",
+  "decision_owner": "Legal operations lead",
+  "observed_evidence": "820 deduplicated CUAD outputs contain 38 errors. Contract-grouped retrospective validation yields mean trained lift 8.45 versus raw lift 0.00; this small sample cannot establish production ROI.",
+  "executive_recommendation": "Prefer a bounded triage evaluation over blanket auto-acceptance. Measure exception-review time and error exposure at contract level before paying fixed integration costs.",
+  "priorities": [
+    "Block auto-acceptance when no simultaneous risk bound is feasible.",
+    "Compare review-all and calibrated triage at the same contract workload, including QA and integration costs.",
+    "Expand automation only if observed review time and residual error stay below the predeclared gates."
+  ],
+  "reversal": "Review-all wins at low volume or if exception review consumes the apparent savings; no option should ship if the risk ceiling fails.",
+  "uncertainty": "Clause correctness is not legal-loss severity; assumed incident rates and dollar losses are not estimates from the 38 errors.",
+  "economics": {
+    "evidence_status": "ILLUSTRATIVE ASSUMPTIONS, NOT MEASURED COSTS OR RISK",
+    "period": "one planning year",
+    "volume": 20000,
+    "review_capacity_hours": 2400,
+    "loss_per_incident_usd": 500,
+    "max_incident_rate": 0.006,
+    "options": [
+      {
+        "name": "Review every clause",
+        "fixed_usd": 0,
+        "incident_rate": 0.002,
+        "activities": [
+          {
+            "name": "Clause review",
+            "unit": "reviewer_hour",
+            "units_per_case": 0.13333333333333333,
+            "usd_per_unit": 90,
+            "cash": false
+          }
+        ]
+      },
+      {
+        "name": "Calibrated triage with exception review",
+        "fixed_usd": 18000,
+        "incident_rate": 0.004,
+        "activities": [
+          {
+            "name": "Exception review: 35% at 9 minutes",
+            "unit": "reviewer_hour",
+            "units_per_case": 0.0525,
+            "usd_per_unit": 90,
+            "cash": false
+          },
+          {
+            "name": "QA: 10% at 3 minutes",
+            "unit": "reviewer_hour",
+            "units_per_case": 0.005000000000000001,
+            "usd_per_unit": 90,
+            "cash": false
+          },
+          {
+            "name": "Inference",
+            "unit": "clause",
+            "units_per_case": 1,
+            "usd_per_unit": 0.08,
+            "cash": true
+          }
+        ]
+      },
+      {
+        "name": "Aggressive auto-acceptance",
+        "fixed_usd": 9000,
+        "incident_rate": 0.018,
+        "activities": [
+          {
+            "name": "Exceptions: 10% at 8 minutes",
+            "unit": "reviewer_hour",
+            "units_per_case": 0.013333333333333334,
+            "usd_per_unit": 90,
+            "cash": false
+          },
+          {
+            "name": "Inference",
+            "unit": "clause",
+            "units_per_case": 1,
+            "usd_per_unit": 0.08,
+            "cash": true
+          }
+        ]
+      }
+    ]
+  },
+  "product": {
+    "seed": 731,
+    "randomization_unit": "reviewer account (contract team clusters in a real trial)",
+    "stages": [
+      "contract_assigned",
+      "clause_batch_reviewed",
+      "review_decision_exported"
+    ],
+    "incident_definition": "material error in an exported review",
+    "retention_interpretation": "reviewer performs another eligible contract review",
+    "observation_day": 56,
+    "minimum_activation_lift": 0.02,
+    "maximum_incident_increase": 0.005,
+    "planning_baseline": 0.45,
+    "minimum_detectable_effect": 0.05,
+    "segments": [
+      {
+        "name": "routine_contract",
+        "start_probability": 0.9,
+        "control_activation": 0.64,
+        "treatment_delta": 0.16,
+        "apply_probability": 0.88,
+        "control_incident": 0.004,
+        "treatment_incident": 0.004,
+        "return7": 0.55,
+        "return28": 0.35
+      },
+      {
+        "name": "complex_contract",
+        "start_probability": 0.8200000000000001,
+        "control_activation": 0.52,
+        "treatment_delta": -0.06,
+        "apply_probability": 0.8,
+        "control_incident": 0.01,
+        "treatment_incident": 0.064,
+        "return7": 0.43000000000000005,
+        "return28": 0.24999999999999997
+      }
+    ]
+  }
+}

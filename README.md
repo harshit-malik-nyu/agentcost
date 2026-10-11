@@ -1,5 +1,7 @@
 # What does an AI agent actually cost to run a process?
 
+**Decision study:** [Executive recommendation](analysis/output/decision_lab/executive-summary.md) · [Cost, cohort and experiment methods](analysis/README.md#decision-laboratory). Behavioral results are synthetic QA; economics are explicit planning assumptions.
+
 > **Validation update (2026-10-10):** Threshold selection now corrects across the full grid. Mechanism analysis removes duplicate task aliases and groups validation folds by contract. See the [current decision brief](docs/decision-brief.md) and [reproducible analysis](analysis/README.md). Historical evidence and figures retain their original run context; this update supersedes conflicting claims below.
 
 
