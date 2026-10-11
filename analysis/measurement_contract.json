@@ -1,0 +1,23 @@
+{
+  "decision": "Choose review-all or calibrated triage for the same eligible contract workload.",
+  "primary_outcome": "Total inference, review, QA and rework cost per eligible contract, with accepted-error risk reported independently.",
+  "denominator": "All eligible assigned contracts, including failures and retries; report clause-level errors separately from contract cost.",
+  "independence_unit": "Contract for retrospective validation; reviewer team for a workflow trial if teammates share routing or training.",
+  "quality_guardrail": "Accepted-error risk bound, review capacity and material-error rate. Do not infer incident dollar severity from clause labels.",
+  "minimum_data": "Contract and clause IDs, assignment, model/policy version, review minutes, inference charges, QA/rework events, truth provenance and material-error adjudication.",
+  "failure_handling": "Keep failed contracts and retry costs. Unadjudicated outputs remain unknown; compare conservative error bounds before auto-acceptance.",
+  "release_rule": "Require quality gates and lower review-adjusted cost under measured workload; the assumed economic model alone does not approve automation.",
+  "reversal": "Exception time, residual error or integration cost eliminates the advantage, or no threshold meets the risk ceiling.",
+  "project": "agentcost",
+  "status": "PROPOSED MEASUREMENT CONTRACT; NOT AN EXECUTED DOMAIN EXPERIMENT",
+  "defense": [
+    [
+      "Is 8.45 lift a financial return?",
+      "No. It is a retrospective model-validation result. Financial return additionally needs measured review effort, deployment cost and error exposure."
+    ],
+    [
+      "Why split by contract?",
+      "Clauses from one contract share context. Splitting those clauses across training and validation can leak information and overstate generalization."
+    ]
+  ]
+}
