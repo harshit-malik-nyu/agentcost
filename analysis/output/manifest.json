@@ -1,0 +1,20 @@
+{
+  "external_services_required": false,
+  "input_sha256": {
+    "evidence/real_agent.cuad.roberta-base-cuad.json": "bc914af4fd0580da38fab86ecd02381ae9e8e007f9f71c773c2c58afd47be4ff",
+    "evidence/real_agent.cuad.roberta-base-on-cuad.json": "ba2ec0012a61be375cc19168e7a7e50401fc0e5d400f5b37eb05b925d5c83ec8"
+  },
+  "outputs": {
+    "query_1.csv": "2655e5de7be9baa7c4f9a18e9cbafb93a7368e4b47dfb43c6f51e5750b846b48",
+    "query_2.csv": "7e158ff0388637bbed3c5927eb93d9fa196244250b0ef7553d8dde469792e327"
+  },
+  "project": "agentcost",
+  "quality_checks": [
+    "SQL type and domain constraints",
+    "row-count reconciliation",
+    "SQLite integrity"
+  ],
+  "query_sha256": "177eaac0ba9472d10a9dafacbcadfc3d1a3a2080dd4c77a6e02e7d176339df3b",
+  "rows": 820,
+  "scope": "Frozen CUAD inference; one model/contract/clause, never duplicate task aliases. Contract is the resampling unit."
+}

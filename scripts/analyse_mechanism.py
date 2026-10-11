@@ -179,13 +179,19 @@ def try_to_fix(records: list[dict], seed: int = 0, folds: int = 5) -> dict:
     an estimate too noisy to conclude from either way.
     """
     rng = random.Random(seed)
-    rows = records[:]
-    rng.shuffle(rows)
+    rows = list({json.dumps({k: v for k, v in r.items() if k != "task"},
+                            sort_keys=True): r for r in records}.values())
+    groups = sorted({r["contract"] for r in rows})
+    rng.shuffle(groups)
+    folds = min(folds, len(groups))
+    if folds < 2:
+        raise ValueError("at least two independent contracts are required")
+    assigned = {g: i % folds for i, g in enumerate(groups)}
 
     fold_lifts, baseline_lifts = [], []
     for f in range(folds):
-        test = rows[f::folds]
-        train = [r for i, r in enumerate(rows) if i % folds != f]
+        test = [r for r in rows if assigned[r["contract"]] == f]
+        train = [r for r in rows if assigned[r["contract"]] != f]
         if not test or not train:
             continue
 
@@ -232,7 +238,7 @@ def try_to_fix(records: list[dict], seed: int = 0, folds: int = 5) -> dict:
 def main() -> int:
     import argparse
     ap = argparse.ArgumentParser()
-    ap.add_argument("--glob", default="real_agent.*.json",
+    ap.add_argument("--glob", default="real_agent.cuad.*.json",
                     help="which measurement files to analyse")
     ap.add_argument("--out", default=str(ROOT / "evidence" / "mechanism.json"))
     args = ap.parse_args()
@@ -259,6 +265,7 @@ def main() -> int:
         by_model.setdefault(r.get("model", "unknown"), []).append(r)
 
     result = {"n_records": len(records),
+              "validation_unit": "held-out contract",
               "n_errors": sum(1 for r in records if not r["correct"]),
               "mechanism": mechanism(records),
               "fix_attempt": try_to_fix(records),

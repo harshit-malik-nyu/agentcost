@@ -1,0 +1,216 @@
+{
+  "n_records": 820,
+  "validation_unit": "held-out contract",
+  "n_errors": 38,
+  "mechanism": {
+    "clause_types_with_errors": 13,
+    "clause_types_total": 41,
+    "top5_share_of_errors": 0.6578947368421053,
+    "worst_clauses": [
+      {
+        "clause": "Effective Date",
+        "errors": 9,
+        "asked": 20,
+        "rate": 0.45
+      },
+      {
+        "clause": "Parties",
+        "errors": 6,
+        "asked": 20,
+        "rate": 0.3
+      },
+      {
+        "clause": "Expiration Date",
+        "errors": 4,
+        "asked": 20,
+        "rate": 0.2
+      },
+      {
+        "clause": "Insurance",
+        "errors": 3,
+        "asked": 20,
+        "rate": 0.15
+      },
+      {
+        "clause": "License Grant",
+        "errors": 3,
+        "asked": 20,
+        "rate": 0.15
+      },
+      {
+        "clause": "Exclusivity",
+        "errors": 2,
+        "asked": 20,
+        "rate": 0.1
+      }
+    ],
+    "error_rate_when_clause_present": 0.21794871794871795,
+    "error_rate_when_clause_absent": 0.02830188679245283,
+    "n_present": 78,
+    "n_absent": 742,
+    "lift_within_present_subset": {
+      "conf_null_margin": 3.5086505190311414,
+      "conf_span_prob": 1.889273356401384,
+      "conf_start_end": 2.4290657439446366
+    },
+    "interpretation": "Confidence appears to encode whether a clause is PRESENT, which the model judges well, rather than whether the extracted span is RIGHT, which it judges badly. Since most questions have nothing to find, accuracy is carried by correct declining, and the errors concentrate where the model has found something and is therefore uniformly confident."
+  },
+  "fix_attempt": {
+    "folds": 5,
+    "trained_lift": 8.453385930309008,
+    "raw_confidence_lift": 0.0,
+    "recovered_ranking": true,
+    "fold_lifts": [
+      0.0,
+      18.22222222222222,
+      18.22222222222222,
+      5.822485207100592,
+      0.0
+    ],
+    "verdict": "A trained combination recovers ranking: the information was present and badly expressed, which is an engineering problem."
+  },
+  "per_model": {
+    "marshmellow77/roberta-base-cuad": {
+      "n": 410,
+      "errors": 14,
+      "mechanism": {
+        "clause_types_with_errors": 9,
+        "clause_types_total": 41,
+        "top5_share_of_errors": 0.7142857142857143,
+        "worst_clauses": [
+          {
+            "clause": "Effective Date",
+            "errors": 4,
+            "asked": 10,
+            "rate": 0.4
+          },
+          {
+            "clause": "Parties",
+            "errors": 2,
+            "asked": 10,
+            "rate": 0.2
+          },
+          {
+            "clause": "License Grant",
+            "errors": 2,
+            "asked": 10,
+            "rate": 0.2
+          },
+          {
+            "clause": "Insurance",
+            "errors": 1,
+            "asked": 10,
+            "rate": 0.1
+          },
+          {
+            "clause": "Expiration Date",
+            "errors": 1,
+            "asked": 10,
+            "rate": 0.1
+          },
+          {
+            "clause": "Exclusivity",
+            "errors": 1,
+            "asked": 10,
+            "rate": 0.1
+          }
+        ],
+        "error_rate_when_clause_present": 0.20512820512820512,
+        "error_rate_when_clause_absent": 0.016172506738544475,
+        "n_present": 39,
+        "n_absent": 371,
+        "lift_within_present_subset": {
+          "conf_null_margin": 3.65625,
+          "conf_span_prob": 1.828125,
+          "conf_start_end": 2.4375
+        },
+        "interpretation": "Confidence appears to encode whether a clause is PRESENT, which the model judges well, rather than whether the extracted span is RIGHT, which it judges badly. Since most questions have nothing to find, accuracy is carried by correct declining, and the errors concentrate where the model has found something and is therefore uniformly confident."
+      },
+      "fix_attempt": {
+        "folds": 5,
+        "trained_lift": 3.8722222222222222,
+        "raw_confidence_lift": 0.0,
+        "recovered_ranking": true,
+        "fold_lifts": [
+          0.0,
+          9.11111111111111,
+          10.25,
+          0.0,
+          0.0
+        ],
+        "verdict": "A trained combination recovers ranking: the information was present and badly expressed, which is an engineering problem."
+      }
+    },
+    "Rakib/roberta-base-on-cuad": {
+      "n": 410,
+      "errors": 24,
+      "mechanism": {
+        "clause_types_with_errors": 12,
+        "clause_types_total": 41,
+        "top5_share_of_errors": 0.6666666666666666,
+        "worst_clauses": [
+          {
+            "clause": "Effective Date",
+            "errors": 5,
+            "asked": 10,
+            "rate": 0.5
+          },
+          {
+            "clause": "Parties",
+            "errors": 4,
+            "asked": 10,
+            "rate": 0.4
+          },
+          {
+            "clause": "Expiration Date",
+            "errors": 3,
+            "asked": 10,
+            "rate": 0.3
+          },
+          {
+            "clause": "Insurance",
+            "errors": 2,
+            "asked": 10,
+            "rate": 0.2
+          },
+          {
+            "clause": "Competitive Restriction Exception",
+            "errors": 2,
+            "asked": 10,
+            "rate": 0.2
+          },
+          {
+            "clause": "Revenue/Profit Sharing",
+            "errors": 2,
+            "asked": 10,
+            "rate": 0.2
+          }
+        ],
+        "error_rate_when_clause_present": 0.23076923076923078,
+        "error_rate_when_clause_absent": 0.04043126684636118,
+        "n_present": 39,
+        "n_absent": 371,
+        "lift_within_present_subset": {
+          "conf_null_margin": 3.3703703703703702,
+          "conf_span_prob": 1.9259259259259258,
+          "conf_start_end": 2.8888888888888884
+        },
+        "interpretation": "Confidence appears to encode whether a clause is PRESENT, which the model judges well, rather than whether the extracted span is RIGHT, which it judges badly. Since most questions have nothing to find, accuracy is carried by correct declining, and the errors concentrate where the model has found something and is therefore uniformly confident."
+      },
+      "fix_attempt": {
+        "folds": 5,
+        "trained_lift": 15.106222222222224,
+        "raw_confidence_lift": 0.0,
+        "recovered_ranking": true,
+        "fold_lifts": [
+          9.11111111111111,
+          18.22222222222222,
+          41.0,
+          4.92,
+          2.2777777777777777
+        ],
+        "verdict": "A trained combination recovers ranking: the information was present and badly expressed, which is an engineering problem."
+      }
+    }
+  }
+}

@@ -1,5 +1,8 @@
 # What does an AI agent actually cost to run a process?
 
+> **Validation update (2026-10-10):** Threshold selection now corrects across the full grid. Mechanism analysis removes duplicate task aliases and groups validation folds by contract. See the [current decision brief](docs/decision-brief.md) and [reproducible analysis](analysis/README.md). Historical evidence and figures retain their original run context; this update supersedes conflicting claims below.
+
+
 **Not what the vendor comparison measures.**
 
 Built on CUAD — 510 commercial contracts annotated by practising lawyers
@@ -149,27 +152,9 @@ present-clause subset, where the presence signal no longer dominates. It does.
 | `span_prob` | 0.00 | **1.89** |
 | `start_end` | 0.00 | **2.43** |
 
-**The fix.** If the information is present but badly expressed, a trained
-combination should recover it. A logistic regression over the same signals,
-five-fold cross-validated, with clause base rates computed **per training fold**
-so no held-out label leaks through a feature:
+**The corrected validation.** The current analysis uses 820 unique model/contract/clause outputs. Both models' outputs for one contract stay in the same fold. Clause base rates are learned only in training folds. On five contract-grouped folds, mean trained lift is **8.45**, compared with **0.00** for raw confidence; per-model trained lifts are **3.87** and **15.11**. See [`mechanism_grouped.json`](evidence/mechanism_grouped.json).
 
-| | Lift |
-|---|---:|
-| Raw `null_margin` | **0.00** |
-| Trained on the three confidence signals alone | **4.56** |
-| Trained with cheap deployment features | **7.21** |
-
-**The information was there the whole time.** Raw confidence cannot rank
-errors; a linear combination of exactly the same numbers ranks them well. This
-is an engineering problem, not a capability ceiling — and it moves the agent
-from the "blind" row of the cost table to the "calibrated" row, from a 75%
-saving to something near 96%.
-
-**What a buyer should take from this.** Do not ask a vendor for an accuracy
-figure, and do not trust a raw confidence score for triage. Ask for the capture
-curve, and if it is flat, ask whether they have tried fitting one — because on
-the evidence here the signal exists and is simply not being used.
+This is a small retrospective sample with 38 errors. Fold lift is unstable and is not a measured deployment saving. Earlier row-random validation and duplicated task-alias inputs are superseded. A trained ranker is promising on this sample; it still needs independent calibration before an accepted-error guarantee can be attached.
 
 ### Tested on a second task: the prediction was partly wrong
 

@@ -53,6 +53,7 @@ decision with a guarantee attached rather than an accuracy number.
 
 from __future__ import annotations
 
+from functools import lru_cache
 import math
 from dataclasses import dataclass, field
 
@@ -83,6 +84,7 @@ def _log_binom_cdf(k: int, n: int, p: float) -> float:
     return total
 
 
+@lru_cache(maxsize=32768)
 def clopper_pearson_upper(k: int, n: int, delta: float = 0.05) -> float:
     """
     Exact upper confidence bound on a binomial rate.
@@ -96,10 +98,12 @@ def clopper_pearson_upper(k: int, n: int, delta: float = 0.05) -> float:
         return 1.0
     if k >= n:
         return 1.0
+    if k == 0:
+        return -math.expm1(math.log(delta) / n)
 
     target = math.log(delta)
     lo, hi = k / n, 1.0
-    for _ in range(200):                      # bisection to ~1e-15
+    for _ in range(70):                      # bisection to ~1e-15
         mid = (lo + hi) / 2
         if _log_binom_cdf(k, n, mid) > target:
             lo = mid
@@ -149,7 +153,7 @@ def control_risk(answers, alpha: float = 0.05, delta: float = 0.05,
     Pick the most permissive review threshold whose selective risk is provably
     at most `alpha`.
 
-    Sweeps candidate thresholds from strict to permissive and returns the one
+    Sweeps a fixed grid with simultaneous bounds from permissive to strict and returns the one
     admitting the most auto-acceptance while its upper confidence bound still
     clears the target. Searching in that direction matters: taking the first
     threshold that clears empirically, rather than by bound, is what allows
@@ -160,47 +164,32 @@ def control_risk(answers, alpha: float = 0.05, delta: float = 0.05,
     marked infeasible. That is the correct answer, and it is the one an
     empirical curve silently avoids giving.
     """
+    if not 0 < alpha < 1 or not 0 < delta < 1 or grid < 1:
+        raise ValueError("alpha and delta must be in (0, 1); grid must be positive")
+    if any(not math.isfinite(a.confidence) or not 0 <= a.confidence <= 1
+           for a in answers):
+        raise ValueError("confidence must be finite and in [0, 1]")
+    sentinel = math.nextafter(1.0, math.inf)
     if not answers:
-        return RiskControlledPolicy(1.0, alpha, delta, 1.0, 0.0, 1.0, 0, 0, False)
-
+        return RiskControlledPolicy(sentinel, alpha, delta, 1.0, 0.0, 1.0, 0, 0, False)
     n = len(answers)
-
-    # The candidate grid is FIXED IN ADVANCE, not read off the observed
-    # confidences.
-    #
-    # Deriving it from the data was a real defect, caught by the coverage
-    # experiment below: fixed-sequence testing only controls risk when the
-    # order of hypotheses is pre-specified, and a grid built from observed
-    # values is chosen after seeing the outcomes. Violations came out at 10%
-    # against a 5% target — small, consistent, and exactly the signature of
-    # selection on the calibration sample.
+    # FIXED IN ADVANCE. Simultaneous Bonferroni bounds account for selecting
+    # ANY candidate on these data, including skipping failed candidates.
     candidates = [i / grid for i in range(grid + 1)]
-
-    best: RiskControlledPolicy | None = None
-    for lam in sorted(candidates, reverse=True):      # strict -> permissive
+    level = delta / len(candidates)
+    for lam in candidates:  # most permissive first
         accepted = [a for a in answers if a.confidence >= lam]
         if not accepted:
             continue
-        errors = sum(1 for a in accepted if not a.correct)
-        bound = clopper_pearson_upper(errors, len(accepted), delta)
+        errors = sum(not a.correct for a in accepted)
+        if errors / len(accepted) > alpha:
+            continue
+        bound = clopper_pearson_upper(errors, len(accepted), level)
         if bound <= alpha:
-            best = RiskControlledPolicy(
-                threshold=lam, alpha=alpha, delta=delta,
-                review_rate=1 - len(accepted) / n,
-                empirical_selective_risk=errors / len(accepted),
-                risk_upper_bound=bound, n_calibration=n,
-                n_accepted=len(accepted), feasible=True,
-            )
-        elif best is not None:
-            break        # bound has crossed; the previous threshold is the pick
-
-    if best is None:
-        return RiskControlledPolicy(
-            threshold=1.0 + 1e-9, alpha=alpha, delta=delta, review_rate=1.0,
-            empirical_selective_risk=0.0, risk_upper_bound=0.0,
-            n_calibration=n, n_accepted=0, feasible=False,
-        )
-    return best
+            return RiskControlledPolicy(lam, alpha, delta, 1-len(accepted)/n,
+                                        errors/len(accepted), bound, n,
+                                        len(accepted), True)
+    return RiskControlledPolicy(sentinel, alpha, delta, 1.0, 0.0, 0.0, n, 0, False)
 
 
 def naive_threshold(answers, alpha: float = 0.05, grid: int = 200) -> float:
