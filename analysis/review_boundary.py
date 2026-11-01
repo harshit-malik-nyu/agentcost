@@ -29,6 +29,7 @@ def at_minutes(spec,minutes):
     e=deepcopy(spec['economics'])
     activity=next(a for a in e['options'][1]['activities'] if a['name']=='Exception review: 35% at 9 minutes')
     activity['units_per_case']=float(D('0.35')*D(str(minutes))/60)
+    activity['name']=f'Exception review: 35% at {minutes} minutes'
     result=economics(e)
     result['exceptionReviewMinutes']=minutes
     return result

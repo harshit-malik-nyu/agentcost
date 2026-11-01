@@ -22,4 +22,5 @@ class Boundaries(unittest.TestCase):
     def test_cash_stays_fixed_while_valued_capacity_changes(self):
         a,b=at_minutes(S,9)['options'][1],at_minutes(S,19)['options'][1]
         self.assertEqual(a['cash_outlay_usd'],b['cash_outlay_usd']);self.assertGreater(b['economic_cost_usd'],a['economic_cost_usd'])
+        self.assertEqual(b['components'][0]['activity'],'Exception review: 35% at 19 minutes')
 if __name__=='__main__':unittest.main()
