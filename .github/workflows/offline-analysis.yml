@@ -17,4 +17,7 @@ jobs:
       - run: python analysis/decision_lab.py
       - run: python analysis/test_assurance.py
       - run: python analysis/assurance.py
-      - run: git diff --exit-code -- analysis/output
+      - run: python analysis/test_review_boundary.py
+      - run: python analysis/review_boundary.py
+      - run: python analysis/build_readme.py
+      - run: git diff --exit-code -- analysis/output README.md
